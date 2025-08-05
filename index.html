@@ -1,45 +1,362 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Josh Robinson</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josh Robinson - Helping Students Thrive</title>
+    <meta name="description" content="Speaker, Educator, and Founder of London Student Network. Helping students build confidence, communication skills, and modern student skills.">
+    
+    <!-- GitHub Pages Configuration -->
+    <base href="/">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>Helping Students Thrive on Their Own Terms</h1>
-    <p>Speaker. Educator. Founder of London Student Network.</p>
-    <a href="#contact" class="cta">Work With Me</a>
-  </header>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Josh Robinson</div>
+            <div class="nav-menu">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hi — I’m Josh. I’ve spent the last few years building student communities, running events, and helping young people find confidence in a chaotic world. Whether it’s through 1:1 tutoring, school workshops, or live events, I believe every student deserves to feel capable and excited about their future.</p>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+            <img src="assets/josh-bridge.jpg" alt="Josh Robinson smiling on a bridge" class="hero-image">
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="hero-title fade-in">Helping students thrive on their own terms.</h1>
+                <p class="hero-subtitle fade-in-delay">Speaker. Educator. Founder of London Student Network.</p>
+                <a href="#contact" class="cta-button fade-in-delay-2">Work With Me</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
 
-  <section id="services">
-    <h2>What I Do</h2>
-    <ul>
-      <li>🎓 1:1 Tutoring</li>
-      <li>🎤 School Workshops</li>
-      <li>🎙️ Speaking Events</li>
-      <li>📣 Brand Building</li>
-    </ul>
-  </section>
+    <!-- About Me Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">Hi — I'm Josh. I've spent the last few years building student communities, running events, and helping young people find confidence in a chaotic world.</p>
+                    <p>Whether it's through 1:1 tutoring, school workshops, or live events, I believe every student deserves to feel capable and excited about their future. As a first-class graduate of King's College London in War Studies and History, I understand the challenges students face and the potential they hold.</p>
+                    <p>Through London Student Network and my work with schools and organizations, I've had the privilege of watching thousands of students discover their voice, build their confidence, and create their own path forward.</p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div class="stat-label">Students Helped</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Workshops Delivered</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <section id="contact">
-    <h2>Let’s Build Something Brilliant</h2>
-    <form>
-      <input type="text" placeholder="Name" required />
-      <input type="email" placeholder="Email" required />
-      <textarea placeholder="Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </section>
+    <!-- What I Offer Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What I Offer</h2>
+                <p class="section-subtitle">Comprehensive support for student growth and development</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="service-title">1:1 Tutoring</h3>
+                    <p class="service-description">Personalized tutoring in History, English, Public Speaking, and Essay Writing. Tailored to each student's learning style and goals.</p>
+                    <ul class="service-features">
+                        <li>Academic subject support</li>
+                        <li>Study skills development</li>
+                        <li>Exam preparation</li>
+                        <li>Personal mentoring</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="service-title">School Workshops</h3>
+                    <p class="service-description">Interactive workshops covering Confidence Building, ADHD Support, Gap Years, and Entrepreneurship for schools and colleges.</p>
+                    <ul class="service-features">
+                        <li>Confidence building sessions</li>
+                        <li>ADHD support strategies</li>
+                        <li>Gap year planning</li>
+                        <li>Entrepreneurship basics</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 class="service-title">Speaking & Events</h3>
+                    <p class="service-description">Engaging talks, panel discussions, and event hosting that inspire and educate audiences of all sizes.</p>
+                    <ul class="service-features">
+                        <li>Keynote speaking</li>
+                        <li>Panel moderation</li>
+                        <li>Event hosting</li>
+                        <li>Workshop facilitation</li>
+                    </ul>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3 class="service-title">Student Brand Building</h3>
+                    <p class="service-description">Strategic guidance for student societies, startups, and schools to build authentic, engaging brands and communities.</p>
+                    <ul class="service-features">
+                        <li>Brand strategy development</li>
+                        <li>Community building</li>
+                        <li>Social media guidance</li>
+                        <li>Event planning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>&copy; 2025 Josh Robinson — hello@joshrobinson.uk</p>
-  </footer>
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">What People Say</h2>
+                <p class="section-subtitle">Real feedback from students, teachers, and organizations</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"Josh brought the room to life — our students walked out more confident, curious, and excited than ever. His workshop on confidence building was transformational."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <p>Teacher, Sixth Form College</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"Working with Josh completely changed my approach to university applications. His tutoring helped me find my voice and articulate my ideas with confidence."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Alex Chen</h4>
+                            <p>Student, King's College London</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"Josh's expertise in building student communities is unmatched. His strategic guidance helped our society grow from 50 to 500+ members in one year."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Emma Rodriguez</h4>
+                            <p>Society President, University College</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Feed Section -->
+    <section class="content-feed" id="content">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Content</h2>
+                <p class="section-subtitle">Follow along for student tips, insights, and community highlights</p>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <div class="content-thumbnail">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <div class="content-info">
+                        <h4>5 Tips for Confident Public Speaking</h4>
+                        <p>Watch on Instagram Reels</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-thumbnail">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <div class="content-info">
+                        <h4>Gap Year Planning Made Simple</h4>
+                        <p>Watch on TikTok</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-thumbnail">
+                        <i class="fas fa-article"></i>
+                    </div>
+                    <div class="content-info">
+                        <h4>Building Student Communities</h4>
+                        <p>Read the full article</p>
+                    </div>
+                </div>
+            </div>
+            <div class="content-cta">
+                <a href="https://instagram.com/joshrobinson.uk" target="_blank" class="social-cta">
+                    <i class="fab fa-instagram"></i>
+                    Follow @joshrobinson.uk
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos/Affiliates Section -->
+    <section class="affiliates" id="affiliates">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Trusted by these communities</h2>
+            </div>
+            <div class="logos-grid">
+                <div class="logo-item">
+                    <img src="assets/lsn-logo.jpg" alt="London Student Network" class="logo-image">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/kings-politics-logo.jpg" alt="King's Politics Society" class="logo-image">
+                </div>
+                <div class="logo-item">
+                    <div class="logo-placeholder">Debate Mate</div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-placeholder">KCL</div>
+                </div>
+                <div class="logo-item">
+                    <div class="logo-placeholder">Real Ice.eco</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Work With Me</h2>
+                <p class="section-subtitle">Got a project? Let's make it brilliant.</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Tell me about your project or how I can help..." rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button">
+                            <span>Send Message</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>hello@joshrobinson.uk</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <h4>Schedule a Call</h4>
+                            <p>Book a free consultation</p>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>London, UK</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <h3>Josh Robinson</h3>
+                    <p>Helping students thrive on their own terms.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/joshrobinson.uk" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/joshrobinson" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-contact">
+                    <h4>Get in Touch</h4>
+                    <p>hello@joshrobinson.uk</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Josh Robinson. Built with caffeine and community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts.js"></script>
 </body>
 </html>
