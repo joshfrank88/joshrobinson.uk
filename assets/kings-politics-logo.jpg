@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kingsGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="200" height="80" fill="white" rx="10"/>
+  
+  <!-- Crown icon -->
+  <path d="M 20 50 L 25 35 L 30 50 L 35 30 L 40 50 L 45 35 L 50 50 Z" fill="url(#kingsGradient)"/>
+  <rect x="20" y="50" width="30" height="5" fill="url(#kingsGradient)"/>
+  
+  <!-- Text -->
+  <text x="65" y="28" fill="#8B0000" font-family="Arial" font-size="14" font-weight="bold">King's College</text>
+  <text x="65" y="43" fill="#8B0000" font-family="Arial" font-size="14" font-weight="bold">Politics</text>
+  <text x="65" y="58" fill="#FFD700" font-family="Arial" font-size="14" font-weight="bold">Society</text>
+</svg>
