@@ -1,202 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Robinson - Helping Students Thrive</title>
-    <meta name="description" content="Speaker, Educator, and Founder of London Student Network. Helping students build confidence, communication skills, and modern student skills.">
+    <title>Josh Robinson - Speaker, Educator & Founder</title>
+    <meta name="description" content="Speaker, Educator, and Founder of London Student Network. Helping students thrive on their own terms through workshops, tutoring, and community building.">
     
-    <!-- GitHub Pages Configuration -->
-    <base href="/">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'navy': '#0A192F',
+                        'navy-light': '#112240',
+                        'navy-lighter': '#233554',
+                        'gold': '#F7931E',
+                        'gold-light': '#FFA726',
+                        'slate': '#8892B0',
+                        'slate-light': '#A8B2D1',
+                        'lightest-slate': '#CCD6F6'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
+                        'fade-in-delay': 'fadeInUp 0.6s ease-out 0.2s forwards',
+                        'fade-in-delay-2': 'fadeInUp 0.6s ease-out 0.4s forwards',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite'
+                    },
+                    backdropBlur: {
+                        xs: '2px'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Styles -->
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(17, 34, 64, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
 </head>
-<body>
+
+<body class="font-inter bg-white text-navy antialiased">
+    
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">Josh Robinson</div>
-            <div class="nav-menu">
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#testimonials" class="nav-link">Testimonials</a>
-                <a href="#contact" class="nav-link">Contact</a>
+    <nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold text-navy">Josh Robinson</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="text-slate hover:text-gold transition-colors duration-200 font-medium">About</a>
+                        <a href="#courses" class="text-slate hover:text-gold transition-colors duration-200 font-medium">Courses</a>
+                        <a href="#testimonials" class="text-slate hover:text-gold transition-colors duration-200 font-medium">Testimonials</a>
+                        <a href="#clients" class="text-slate hover:text-gold transition-colors duration-200 font-medium">Clients</a>
+                        <a href="#contact" class="bg-gold hover:bg-gold-light text-white px-6 py-2 rounded-full transition-all duration-200 font-medium">Contact</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="text-slate hover:text-gold transition-colors duration-200" id="mobile-menu-button">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
             </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="md:hidden hidden glass-dark" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 text-slate hover:text-gold transition-colors duration-200 font-medium">About</a>
+                <a href="#courses" class="block px-3 py-2 text-slate hover:text-gold transition-colors duration-200 font-medium">Courses</a>
+                <a href="#testimonials" class="block px-3 py-2 text-slate hover:text-gold transition-colors duration-200 font-medium">Testimonials</a>
+                <a href="#clients" class="block px-3 py-2 text-slate hover:text-gold transition-colors duration-200 font-medium">Clients</a>
+                <a href="#contact" class="block mx-3 my-2 bg-gold hover:bg-gold-light text-white px-6 py-2 rounded-full transition-all duration-200 font-medium text-center">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-background">
-            <div class="hero-overlay"></div>
-            <img src="assets/josh-bridge.jpg" alt="Josh Robinson smiling on a bridge" class="hero-image">
+    <section class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-navy via-navy-light to-navy-lighter overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-20 left-20 w-32 h-32 bg-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 bg-gold-light rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+            <div class="absolute bottom-20 left-1/3 w-40 h-40 bg-gold rounded-full mix-blend-multiply filter blur-xl animate-pulse-slow" style="animation-delay: 2s;"></div>
         </div>
-        <div class="hero-content">
-            <div class="container">
-                <h1 class="hero-title fade-in">Helping students thrive on their own terms.</h1>
-                <p class="hero-subtitle fade-in-delay">Speaker. Educator. Founder of London Student Network.</p>
-                <a href="#contact" class="cta-button fade-in-delay-2">Work With Me</a>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="space-y-8">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight opacity-0 animate-fade-in-up">
+                    Helping Students Thrive<br>
+                    <span class="text-gold">on Their Own Terms</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-slate-light max-w-3xl mx-auto opacity-0 animate-fade-in-delay">
+                    Speaker. Educator. Founder of London Student Network.
+                </p>
+                
+                <div class="opacity-0 animate-fade-in-delay-2">
+                    <a href="#contact" class="inline-flex items-center px-8 py-4 bg-gold hover:bg-gold-light text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-2xl">
+                        Work With Me
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce-slow">
+            <i class="fas fa-chevron-down text-2xl"></i>
         </div>
     </section>
 
-    <!-- About Me Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="about-intro">Hi — I'm Josh. I've spent the last few years building student communities, running events, and helping young people find confidence in a chaotic world.</p>
-                    <p>Whether it's through 1:1 tutoring, school workshops, or live events, I believe every student deserves to feel capable and excited about their future. As a first-class graduate of King's College London in War Studies and History, I understand the challenges students face and the potential they hold.</p>
-                    <p>Through London Student Network and my work with schools and organizations, I've had the privilege of watching thousands of students discover their voice, build their confidence, and create their own path forward.</p>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-item">
-                        <div class="stat-number">1000+</div>
-                        <div class="stat-label">Students Helped</div>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h2 class="text-4xl md:text-5xl font-bold text-navy mb-8">
+                        Hi — I'm <span class="text-gold">Josh</span>.
+                    </h2>
+                    <div class="space-y-6 text-slate text-lg leading-relaxed">
+                        <p>
+                            I'm a speaker, tutor, and educator who's spent the last few years building student communities, running events, and helping young people build confidence in a chaotic world.
+                        </p>
+                        <p>
+                            I graduated with <strong class="text-navy">First-Class Honours in War Studies and History</strong> from King's College London, where I also founded the <strong class="text-navy">London Student Network</strong> — one of London's fastest-growing intercollegiate student startups.
+                        </p>
+                        <p>
+                            Through 1:1 tutoring, workshops, and live events, I've helped <strong class="text-gold">thousands of students</strong> find clarity, connection, and confidence.
+                        </p>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Workshops Delivered</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">5+</div>
-                        <div class="stat-label">Years Experience</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What I Offer Section -->
-    <section class="services" id="services">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">What I Offer</h2>
-                <p class="section-subtitle">Comprehensive support for student growth and development</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <h3 class="service-title">1:1 Tutoring</h3>
-                    <p class="service-description">Personalized tutoring in History, English, Public Speaking, and Essay Writing. Tailored to each student's learning style and goals.</p>
-                    <ul class="service-features">
-                        <li>Academic subject support</li>
-                        <li>Study skills development</li>
-                        <li>Exam preparation</li>
-                        <li>Personal mentoring</li>
-                    </ul>
                 </div>
                 
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <h3 class="service-title">School Workshops</h3>
-                    <p class="service-description">Interactive workshops covering Confidence Building, ADHD Support, Gap Years, and Entrepreneurship for schools and colleges.</p>
-                    <ul class="service-features">
-                        <li>Confidence building sessions</li>
-                        <li>ADHD support strategies</li>
-                        <li>Gap year planning</li>
-                        <li>Entrepreneurship basics</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-microphone-alt"></i>
-                    </div>
-                    <h3 class="service-title">Speaking & Events</h3>
-                    <p class="service-description">Engaging talks, panel discussions, and event hosting that inspire and educate audiences of all sizes.</p>
-                    <ul class="service-features">
-                        <li>Keynote speaking</li>
-                        <li>Panel moderation</li>
-                        <li>Event hosting</li>
-                        <li>Workshop facilitation</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3 class="service-title">Student Brand Building</h3>
-                    <p class="service-description">Strategic guidance for student societies, startups, and schools to build authentic, engaging brands and communities.</p>
-                    <ul class="service-features">
-                        <li>Brand strategy development</li>
-                        <li>Community building</li>
-                        <li>Social media guidance</li>
-                        <li>Event planning</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">What People Say</h2>
-                <p class="section-subtitle">Real feedback from students, teachers, and organizations</p>
-            </div>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"Josh brought the room to life — our students walked out more confident, curious, and excited than ever. His workshop on confidence building was transformational."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Sarah Mitchell</h4>
-                            <p>Teacher, Sixth Form College</p>
+                <div class="animate-on-scroll">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-gradient-to-br from-navy to-navy-light p-6 rounded-2xl text-white text-center shadow-xl">
+                            <div class="text-3xl font-bold text-gold mb-2">5000+</div>
+                            <div class="text-sm text-slate-light">Students Helped</div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"Working with Josh completely changed my approach to university applications. His tutoring helped me find my voice and articulate my ideas with confidence."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Alex Chen</h4>
-                            <p>Student, King's College London</p>
+                        <div class="bg-gradient-to-br from-gold to-gold-light p-6 rounded-2xl text-white text-center shadow-xl">
+                            <div class="text-3xl font-bold mb-2">100+</div>
+                            <div class="text-sm">Workshops Delivered</div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"Josh's expertise in building student communities is unmatched. His strategic guidance helped our society grow from 50 to 500+ members in one year."</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Emma Rodriguez</h4>
-                            <p>Society President, University College</p>
+                        <div class="bg-gradient-to-br from-navy-light to-navy-lighter p-6 rounded-2xl text-white text-center shadow-xl">
+                            <div class="text-3xl font-bold text-gold mb-2">50+</div>
+                            <div class="text-sm text-slate-light">Universities Reached</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gold-light to-gold p-6 rounded-2xl text-white text-center shadow-xl">
+                            <div class="text-3xl font-bold mb-2">1st</div>
+                            <div class="text-sm">Class Honours</div>
                         </div>
                     </div>
                 </div>
@@ -204,159 +211,322 @@
         </div>
     </section>
 
-    <!-- Content Feed Section -->
-    <section class="content-feed" id="content">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Latest Content</h2>
-                <p class="section-subtitle">Follow along for student tips, insights, and community highlights</p>
+    <!-- Courses & Workshops Section -->
+    <section id="courses" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold text-navy mb-6">Courses & Workshops</h2>
+                <p class="text-xl text-slate max-w-3xl mx-auto">Empowering students with practical skills and mindset shifts for academic and personal success.</p>
             </div>
-            <div class="content-grid">
-                <div class="content-card">
-                    <div class="content-thumbnail">
-                        <i class="fab fa-instagram"></i>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <!-- Course Cards -->
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-white text-xl"></i>
                     </div>
-                    <div class="content-info">
-                        <h4>5 Tips for Confident Public Speaking</h4>
-                        <p>Watch on Instagram Reels</p>
-                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Thriving with ADHD</h3>
+                    <p class="text-slate">Strategies and tools for ADHD students to excel academically and personally.</p>
                 </div>
                 
-                <div class="content-card">
-                    <div class="content-thumbnail">
-                        <i class="fab fa-tiktok"></i>
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-navy to-navy-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-comments text-white text-xl"></i>
                     </div>
-                    <div class="content-info">
-                        <h4>Gap Year Planning Made Simple</h4>
-                        <p>Watch on TikTok</p>
-                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Confidence & Communication</h3>
+                    <p class="text-slate">Build unshakeable confidence and master effective communication skills.</p>
                 </div>
                 
-                <div class="content-card">
-                    <div class="content-thumbnail">
-                        <i class="fas fa-article"></i>
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
                     </div>
-                    <div class="content-info">
-                        <h4>Building Student Communities</h4>
-                        <p>Read the full article</p>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Making the Most of University</h3>
+                    <p class="text-slate">Navigate university life with purpose, connection, and academic excellence.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-navy to-navy-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-file-alt text-white text-xl"></i>
                     </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">UCAS + Personal Statements</h3>
+                    <p class="text-slate">Craft compelling applications that stand out to admissions committees.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-rocket text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Entrepreneurship at Uni</h3>
+                    <p class="text-slate">Start and scale student ventures while balancing academic commitments.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-navy to-navy-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-calendar-alt text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Gap Year Planning</h3>
+                    <p class="text-slate">Make your gap year productive, meaningful, and university-application ready.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-book-open text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Study Like a Human</h3>
+                    <p class="text-slate">Effective study methods that work with your brain, not against it.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-navy to-navy-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Growth Mindset & Motivation</h3>
+                    <p class="text-slate">Develop resilience and maintain motivation through challenges.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-gold to-gold-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-users text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Debating Workshops</h3>
+                    <p class="text-slate">Master the art of persuasion and critical thinking through debate.</p>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-navy to-navy-light rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-cogs text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-navy mb-2">Custom School Sessions</h3>
+                    <p class="text-slate">Tailored workshops designed specifically for your school's needs.</p>
                 </div>
             </div>
-            <div class="content-cta">
-                <a href="https://instagram.com/joshrobinson.uk" target="_blank" class="social-cta">
-                    <i class="fab fa-instagram"></i>
-                    Follow @joshrobinson.uk
+            
+            <div class="text-center animate-on-scroll">
+                <a href="#contact" class="inline-flex items-center px-8 py-4 bg-navy hover:bg-navy-light text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl">
+                    <i class="fas fa-download mr-2"></i>
+                    Download Full Workshop Menu
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Logos/Affiliates Section -->
-    <section class="affiliates" id="affiliates">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Trusted by these communities</h2>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold text-navy mb-6">What People Say</h2>
+                <p class="text-xl text-slate max-w-3xl mx-auto">Real feedback from students, teachers, and institutions who've experienced the impact.</p>
             </div>
-            <div class="logos-grid">
-                <div class="logo-item">
-                    <img src="assets/lsn-logo.jpg" alt="London Student Network" class="logo-image">
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="animate-on-scroll bg-gradient-to-br from-navy to-navy-light p-8 rounded-2xl text-white shadow-xl">
+                    <div class="mb-6">
+                        <i class="fas fa-quote-left text-3xl text-gold mb-4"></i>
+                        <p class="text-lg leading-relaxed">
+                            "Josh's session genuinely changed the way I think. He made complex ideas feel accessible and gave me tools I still use every day."
+                        </p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Sarah Chen</div>
+                            <div class="text-slate-light text-sm">University Student</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <img src="assets/kings-politics-logo.jpg" alt="King's Politics Society" class="logo-image">
+                
+                <div class="animate-on-scroll bg-gradient-to-br from-gold to-gold-light p-8 rounded-2xl text-white shadow-xl">
+                    <div class="mb-6">
+                        <i class="fas fa-quote-left text-3xl mb-4"></i>
+                        <p class="text-lg leading-relaxed">
+                            "One of the most inspiring workshops we've ever had. Josh connected with our students instantly and left them buzzing with ideas."
+                        </p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-chalkboard-teacher text-white"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Mr. James Parker</div>
+                            <div class="text-sm opacity-90">Head of Sixth Form</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <div class="logo-placeholder">Debate Mate</div>
+                
+                <div class="animate-on-scroll bg-gradient-to-br from-navy-light to-navy-lighter p-8 rounded-2xl text-white shadow-xl">
+                    <div class="mb-6">
+                        <i class="fas fa-quote-left text-3xl text-gold mb-4"></i>
+                        <p class="text-lg leading-relaxed">
+                            "Relatable, honest, and empowering. Josh doesn't just talk at you — he talks with you. That made all the difference."
+                        </p>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gold rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user text-white"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold">Alex Rodriguez</div>
+                            <div class="text-slate-light text-sm">A-Level Student</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <div class="logo-placeholder">KCL</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold text-navy mb-6">Trusted by Leading Institutions</h2>
+                <p class="text-xl text-slate max-w-3xl mx-auto">Working with universities, schools, and organizations across London and beyond.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center">
+                <!-- Client Logos - Using placeholder boxes for now -->
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">King's College</div>
+                        <div class="text-slate text-xs">London</div>
+                    </div>
                 </div>
-                <div class="logo-item">
-                    <div class="logo-placeholder">Real Ice.eco</div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">UCL</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">LSE</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">Westminster</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">Imperial</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">Teach First</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-xs">Speakers for</div>
+                        <div class="text-navy font-bold text-xs">Schools</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">Debate Mate</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">IntoUniversity</div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center h-24">
+                    <div class="text-center">
+                        <div class="text-navy font-bold text-sm">Forest App</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Work With Me</h2>
-                <p class="section-subtitle">Got a project? Let's make it brilliant.</p>
+    <section id="contact" class="py-20 bg-gradient-to-br from-navy via-navy-light to-navy-lighter">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 animate-on-scroll">
+                <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Let's Work Together</h2>
+                <p class="text-xl text-slate-light max-w-3xl mx-auto">Ready to empower your students? Let's discuss how we can create something impactful together.</p>
             </div>
-            <div class="contact-content">
-                <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            
+            <div class="glass-dark rounded-3xl p-8 md:p-12 animate-on-scroll">
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-light mb-2">Name</label>
+                            <input type="text" id="name" name="name" required
+                                class="w-full px-4 py-3 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl text-white placeholder-slate-light focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-200"
+                                placeholder="Your full name">
                         </div>
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-light mb-2">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-4 py-3 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl text-white placeholder-slate-light focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-200"
+                                placeholder="your@email.com">
                         </div>
-                        <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Tell me about your project or how I can help..." rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-slate-light mb-2">Message</label>
+                        <textarea id="message" name="message" rows="6" required
+                            class="w-full px-4 py-3 bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl text-white placeholder-slate-light focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-200 resize-none"
+                            placeholder="Tell me about your project, institution, or how I can help your students..."></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" id="submitButton"
+                            class="inline-flex items-center px-8 py-4 bg-gold hover:bg-gold-light text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-xl">
                             <span>Send Message</span>
-                            <i class="fas fa-arrow-right"></i>
+                            <i class="fas fa-paper-plane ml-2"></i>
                         </button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-method">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>hello@joshrobinson.uk</p>
-                        </div>
                     </div>
-                    <div class="contact-method">
-                        <i class="fas fa-calendar"></i>
-                        <div>
-                            <h4>Schedule a Call</h4>
-                            <p>Book a free consultation</p>
-                        </div>
-                    </div>
-                    <div class="contact-method">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <p>London, UK</p>
-                        </div>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-main">
-                    <h3>Josh Robinson</h3>
-                    <p>Helping students thrive on their own terms.</p>
-                    <div class="social-links">
-                        <a href="https://instagram.com/joshrobinson.uk" target="_blank" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/joshrobinson" target="_blank" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
+    <footer class="bg-navy py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-slate-light">&copy; 2024 Josh Robinson. All rights reserved.</p>
                 </div>
-                <div class="footer-contact">
-                    <h4>Get in Touch</h4>
-                    <p>hello@joshrobinson.uk</p>
+                <div class="flex space-x-6">
+                    <a href="https://linkedin.com/in/joshrobinson" target="_blank" class="text-slate-light hover:text-gold transition-colors duration-200">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://instagram.com/joshrobinson.uk" target="_blank" class="text-slate-light hover:text-gold transition-colors duration-200">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Josh Robinson. Built with caffeine and community.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Success Message Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-md mx-4 text-center transform scale-95 transition-transform duration-300">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check text-green-500 text-2xl"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-navy mb-2">Message Sent!</h3>
+            <p class="text-slate mb-6">Thanks for reaching out. I'll get back to you within 24 hours.</p>
+            <button onclick="closeSuccessModal()" class="px-6 py-2 bg-gold hover:bg-gold-light text-white rounded-full transition-colors duration-200">
+                Close
+            </button>
+        </div>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
