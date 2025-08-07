@@ -1,4 +1,4 @@
-// ===== MODERN JOSH ROBINSON WEBSITE INTERACTIONS =====
+// ===== ULTRA-SLEEK JOSH ROBINSON WEBSITE INTERACTIONS =====
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeWebsite();
@@ -13,7 +13,7 @@ function initializeWebsite() {
     setupPerformanceOptimizations();
     
     console.log('🚀 Josh Robinson website loaded successfully!');
-    console.log('✨ Modern student empowerment hub ready');
+    console.log('✨ Ultra-sleek student empowerment hub ready');
 }
 
 // ===== NAVIGATION SYSTEM =====
@@ -23,25 +23,25 @@ function setupNavigation() {
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     
-    // Navbar scroll effect
+    // Navbar scroll effect with smooth transitions
     window.addEventListener('scroll', function() {
         if (window.scrollY > 100) {
             navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             navbar.style.backdropFilter = 'blur(20px)';
-            navbar.style.boxShadow = '0 2px 20px rgba(11, 29, 58, 0.1)';
+            navbar.style.boxShadow = '0 2px 20px rgba(10, 29, 63, 0.1)';
         } else {
             navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             navbar.style.boxShadow = 'none';
         }
     });
     
-    // Mobile menu toggle
+    // Mobile menu toggle with smooth animations
     if (hamburger && navMenu) {
         hamburger.addEventListener('click', function() {
             navMenu.classList.toggle('active');
             hamburger.classList.toggle('active');
             
-            // Animate hamburger
+            // Animate hamburger with smooth transitions
             const spans = hamburger.querySelectorAll('span');
             if (hamburger.classList.contains('active')) {
                 spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
@@ -55,7 +55,7 @@ function setupNavigation() {
         });
     }
     
-    // Smooth scrolling for navigation links
+    // Smooth scrolling for navigation links with enhanced UX
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -71,7 +71,7 @@ function setupNavigation() {
                 navMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 
-                // Smooth scroll
+                // Enhanced smooth scroll with easing
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
@@ -83,7 +83,7 @@ function setupNavigation() {
         });
     });
     
-    // Active section highlighting
+    // Active section highlighting with smooth transitions
     window.addEventListener('scroll', updateActiveNavLink);
 }
 
@@ -114,6 +114,7 @@ function setupScrollEffects() {
     setupParallaxEffects();
     setupScrollToTop();
     initializeIntersectionObserver();
+    setupStaggeredAnimations();
 }
 
 function createScrollProgress() {
@@ -124,7 +125,7 @@ function createScrollProgress() {
         left: 0;
         width: 0%;
         height: 3px;
-        background: linear-gradient(135deg, #f9a825, #fdd835);
+        background: linear-gradient(90deg, #F5B700, #0A1D3F);
         z-index: 9999;
         transition: width 0.1s ease;
     `;
@@ -150,10 +151,10 @@ function setupParallaxEffects() {
             heroParticles.style.transform = `translateY(${rate * 0.3}px)`;
         }
         
-        // Parallax for hero image
+        // Enhanced parallax for hero image with smoother transitions
         const heroImage = document.querySelector('.hero-image-container');
         if (heroImage && scrolled < window.innerHeight) {
-            heroImage.style.transform = `translateY(${scrolled * 0.2}px) rotate(3deg)`;
+            heroImage.style.transform = `translateY(${scrolled * 0.2}px) rotate(2deg)`;
         }
     });
 }
@@ -167,13 +168,13 @@ function setupScrollToTop() {
         right: 2rem;
         width: 50px;
         height: 50px;
-        background: linear-gradient(135deg, #f9a825, #fdd835);
-        color: #0b1d3a;
+        background: linear-gradient(135deg, #F5B700, #0A1D3F);
+        color: #FFFFFF;
         border: none;
         border-radius: 50%;
         cursor: pointer;
-        box-shadow: 0 4px 20px rgba(249, 168, 37, 0.3);
-        transition: all 0.3s ease;
+        box-shadow: 0 4px 20px rgba(245, 183, 0, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         transform: scale(0);
         z-index: 1000;
         font-size: 1.2rem;
@@ -203,6 +204,30 @@ function setupScrollToTop() {
     });
 }
 
+function setupStaggeredAnimations() {
+    // Staggered animation for credential items
+    const credentialItems = document.querySelectorAll('.credentials-list li');
+    credentialItems.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(20px)';
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(item);
+    });
+}
+
 function initializeIntersectionObserver() {
     const observerOptions = {
         threshold: 0.1,
@@ -212,17 +237,17 @@ function initializeIntersectionObserver() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Add staggered animation delay
+                // Add staggered animation delay with enhanced timing
                 setTimeout(() => {
                     entry.target.classList.add('animate-in');
-                }, index * 100);
+                }, index * 150);
                 
                 // Special animations for specific elements
-                if (entry.target.classList.contains('metric-card')) {
-                    animateCountUp(entry.target);
+                if (entry.target.classList.contains('service-card')) {
+                    entry.target.style.animationDelay = `${index * 0.3}s`;
                 }
                 
-                if (entry.target.classList.contains('service-card')) {
+                if (entry.target.classList.contains('interest-card')) {
                     entry.target.style.animationDelay = `${index * 0.2}s`;
                 }
                 
@@ -231,16 +256,16 @@ function initializeIntersectionObserver() {
         });
     }, observerOptions);
     
-    // Observe elements for animation
+    // Observe elements for animation with enhanced selection
     const animateElements = document.querySelectorAll(`
         .hero-text,
         .about-text,
-        .metric-card,
         .service-card,
-        .testimonial-card,
+        .interest-card,
         .partner-item,
         .contact-form-container,
-        .contact-info
+        .contact-info,
+        .credential-category
     `);
     
     animateElements.forEach(element => {
@@ -254,10 +279,11 @@ function setupAnimations() {
     setupHoverEffects();
     setupCountUpAnimations();
     setupTypingEffect();
+    setupMorphingAnimations();
 }
 
 function setupHoverEffects() {
-    // Service card hover effects
+    // Enhanced service card hover effects
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -267,6 +293,9 @@ function setupHoverEffects() {
             if (icon) {
                 icon.style.transform = 'rotate(5deg) scale(1.1)';
             }
+            
+            // Add subtle glow effect
+            this.style.boxShadow = '0 20px 60px rgba(10, 29, 63, 0.3)';
         });
         
         card.addEventListener('mouseleave', function() {
@@ -276,22 +305,34 @@ function setupHoverEffects() {
             if (icon) {
                 icon.style.transform = 'rotate(0deg) scale(1)';
             }
+            
+            this.style.boxShadow = '';
         });
     });
     
-    // Testimonial card hover effects
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    testimonialCards.forEach(card => {
+    // Enhanced interest card hover effects
+    const interestCards = document.querySelectorAll('.interest-card');
+    interestCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) rotate(1deg)';
+            this.style.transform = 'translateY(-5px) scale(1.05)';
+            
+            const icon = this.querySelector('.interest-icon');
+            if (icon) {
+                icon.style.transform = 'rotate(10deg) scale(1.1)';
+            }
         });
         
         card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0) rotate(0deg)';
+            this.style.transform = 'translateY(0) scale(1)';
+            
+            const icon = this.querySelector('.interest-icon');
+            if (icon) {
+                icon.style.transform = 'rotate(0deg) scale(1)';
+            }
         });
     });
     
-    // Partner logo hover effects
+    // Enhanced partner logo hover effects
     const partnerItems = document.querySelectorAll('.partner-item');
     partnerItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
@@ -302,6 +343,24 @@ function setupHoverEffects() {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
+}
+
+function setupMorphingAnimations() {
+    // Morphing background effect for hero section
+    const heroBackground = document.querySelector('.hero-particles');
+    if (heroBackground) {
+        let time = 0;
+        function animate() {
+            time += 0.01;
+            heroBackground.style.backgroundImage = `
+                radial-gradient(circle at ${20 + Math.sin(time) * 10}% ${80 + Math.cos(time) * 10}%, #F5B700 0%, transparent 50%),
+                radial-gradient(circle at ${80 + Math.sin(time * 0.5) * 10}% ${20 + Math.cos(time * 0.5) * 10}%, rgba(245, 183, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at ${40 + Math.sin(time * 0.3) * 10}% ${40 + Math.cos(time * 0.3) * 10}%, #F5B700 0%, transparent 50%)
+            `;
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
 }
 
 function setupCountUpAnimations() {
@@ -316,9 +375,9 @@ function setupCountUpAnimations() {
         if (isNaN(targetNumber)) return;
         
         let currentNumber = 0;
-        const increment = targetNumber / 50;
-        const duration = 2000;
-        const stepTime = duration / 50;
+        const increment = targetNumber / 60;
+        const duration = 2500;
+        const stepTime = duration / 60;
         
         const timer = setInterval(() => {
             currentNumber += increment;
@@ -337,10 +396,10 @@ function setupTypingEffect() {
     if (!titleHighlight) return;
     
     const phrases = [
-        'unstoppable success',
-        'confident leaders',
-        'bright futures',
-        'amazing potential'
+        'on their own terms',
+        'with confidence',
+        'beyond expectations',
+        'with purpose'
     ];
     
     let currentPhrase = 0;
@@ -361,7 +420,7 @@ function setupTypingEffect() {
         let typeSpeed = isDeleting ? 50 : 100;
         
         if (!isDeleting && currentChar === current.length) {
-            typeSpeed = 2000;
+            typeSpeed = 3000;
             isDeleting = true;
         } else if (isDeleting && currentChar === 0) {
             isDeleting = false;
@@ -372,7 +431,7 @@ function setupTypingEffect() {
     }
     
     // Start typing effect after a delay
-    setTimeout(typeEffect, 3000);
+    setTimeout(typeEffect, 4000);
 }
 
 // ===== FORM HANDLING =====
@@ -393,16 +452,16 @@ function setupFormHandling() {
             message: formData.get('message')
         };
         
-        // Validation
+        // Enhanced validation
         if (!validateForm(data)) return;
         
-        // Show loading state
+        // Show loading state with enhanced animation
         const originalText = submitButton.innerHTML;
         submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
         submitButton.disabled = true;
         submitButton.style.opacity = '0.7';
         
-        // Simulate form submission (replace with actual endpoint)
+        // Simulate form submission with enhanced UX
         setTimeout(() => {
             contactForm.reset();
             submitButton.innerHTML = originalText;
@@ -411,10 +470,10 @@ function setupFormHandling() {
             
             showSuccessModal();
             trackEvent('form_submit', 'conversion', data.service);
-        }, 2000);
+        }, 2500);
     });
     
-    // Real-time validation
+    // Real-time validation with enhanced feedback
     const formInputs = contactForm.querySelectorAll('input, select, textarea');
     formInputs.forEach(input => {
         input.addEventListener('blur', function() {
@@ -510,6 +569,7 @@ function showFieldError(fieldName, message) {
             color: #ef4444;
             font-size: 0.875rem;
             margin-top: 0.5rem;
+            font-family: 'Roboto Mono', monospace;
         `;
         errorElement.textContent = message;
         field.parentNode.appendChild(errorElement);
@@ -571,8 +631,8 @@ function closeSuccessModal() {
 function setupInteractiveElements() {
     setupCTATracking();
     setupServiceCardInteractions();
-    setupTestimonialCarousel();
     setupKeyboardNavigation();
+    setupEnhancedHoverEffects();
 }
 
 function setupCTATracking() {
@@ -608,7 +668,7 @@ function setupServiceCardInteractions() {
                 serviceSelect.value = optionMap[serviceTitle] || 'other';
             }
             
-            // Scroll to contact form
+            // Scroll to contact form with enhanced animation
             const contactSection = document.getElementById('contact');
             if (contactSection) {
                 contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -619,19 +679,28 @@ function setupServiceCardInteractions() {
     });
 }
 
-function setupTestimonialCarousel() {
-    const testimonials = document.querySelectorAll('.testimonial-card');
-    
-    testimonials.forEach((testimonial, index) => {
-        testimonial.style.animationDelay = `${index * 0.2}s`;
-        
-        // Add hover pause effect
-        testimonial.addEventListener('mouseenter', function() {
-            this.style.animationPlayState = 'paused';
+function setupEnhancedHoverEffects() {
+    // Enhanced hover effects for section tags
+    const sectionTags = document.querySelectorAll('.section-tag');
+    sectionTags.forEach(tag => {
+        tag.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
         });
         
-        testimonial.addEventListener('mouseleave', function() {
-            this.style.animationPlayState = 'running';
+        tag.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    });
+    
+    // Enhanced hover effects for credential items
+    const credentialItems = document.querySelectorAll('.credentials-list li');
+    credentialItems.forEach(item => {
+        item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateX(10px) scale(1.02)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateX(0) scale(1)';
         });
     });
 }
@@ -684,6 +753,7 @@ function setupPerformanceOptimizations() {
     setupLazyLoading();
     setupImageOptimization();
     setupPreloading();
+    setupSmoothScrolling();
 }
 
 function setupLazyLoading() {
@@ -726,7 +796,8 @@ function setupImageOptimization() {
 function setupPreloading() {
     // Preload critical assets
     const criticalAssets = [
-        'assets/josh-bridge.jpg',
+        'assets/graduation-photo.jpg',
+        'assets/professional-portrait.jpg',
         // Add more critical assets here
     ];
     
@@ -736,6 +807,29 @@ function setupPreloading() {
         link.as = 'image';
         link.href = asset;
         document.head.appendChild(link);
+    });
+}
+
+function setupSmoothScrolling() {
+    // Enhanced smooth scrolling for all internal links
+    const internalLinks = document.querySelectorAll('a[href^="#"]');
+    internalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const navbarHeight = 80;
+                const targetPosition = targetSection.offsetTop - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
     });
 }
 
