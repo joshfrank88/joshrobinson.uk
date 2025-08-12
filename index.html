@@ -3,37 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Robinson - Empowering Students to Thrive</title>
-    <meta name="description" content="First-class King's College graduate, London Student Network founder, and student empowerment specialist. Helping students break free from rigid expectations.">
+    <title>Josh Robinson - Student Success Coach | Academic Tutoring & Workshops</title>
+    <meta name="description" content="Transform your academic journey with personalized tutoring, workshops, and coaching. From struggling student to first-class graduate, I help students build confidence and achieve their potential. Expert in History, Politics, ADHD support, and university admissions.">
+    <meta name="keywords" content="student coaching, academic tutoring, university admissions, public speaking, ADHD support, study skills, confidence building, history tutor, politics tutor, UCAS personal statement, debate coaching">
+    <meta name="author" content="Josh Robinson">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://joshrobinson.uk">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joshrobinson.uk">
+    <meta property="og:title" content="Josh Robinson - Student Success Coach | Academic Tutoring & Workshops">
+    <meta property="og:description" content="Transform your academic journey with personalized tutoring, workshops, and coaching. From struggling student to first-class graduate, I help students build confidence and achieve their potential.">
+    <meta property="og:image" content="https://joshrobinson.uk/assets/St%20pauls.jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://joshrobinson.uk">
+    <meta property="twitter:title" content="Josh Robinson - Student Success Coach | Academic Tutoring & Workshops">
+    <meta property="twitter:description" content="Transform your academic journey with personalized tutoring, workshops, and coaching. From struggling student to first-class graduate, I help students build confidence and achieve their potential.">
+    <meta property="twitter:image" content="https://joshrobinson.uk/assets/St%20pauls.jpeg">
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#0a1d3f">
+    <meta name="msapplication-TileColor" content="#0a1d3f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon.ico">
+    
+    <!-- Preload critical fonts with font-display: swap -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"></noscript>
+    
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="style.css"></noscript>
+    
+    <!-- Preload critical images with dimensions -->
+    <link rel="preload" href="assets/St%20pauls.jpeg" as="image" type="image/jpeg">
+    
+    <!-- Font Awesome with preload -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- Critical CSS Inline for above-the-fold content -->
+    <style>
+        /* Critical CSS for above-the-fold content */
+        :root {
+            --primary-navy: #0a1d3f;
+            --secondary-white: #f8fafc;
+            --accent-gold: #f5b700;
+            --font-heading: 'DM Serif Display', serif;
+            --font-body: 'Roboto Mono', monospace;
+            --section-padding: 6rem 0;
+            --radius-small: 8px;
+            --radius-medium: 16px;
+            --radius-large: 24px;
+            --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--primary-navy);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Hero Section Critical CSS */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1a365d 100%);
+            color: var(--secondary-white);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(11, 29, 58, 0.8) 0%, transparent 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+        
+        .hero-content .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-heading);
+        }
+        
+        .title-highlight {
+            color: var(--accent-gold);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title-highlight::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: var(--accent-gold);
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        .cta-primary {
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+            padding: 1rem 2rem;
+            border-radius: var(--radius-small);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(245, 183, 0, 0.3);
+        }
+        
+        .cta-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(245, 183, 0, 0.4);
+        }
+        
+        .hero-headshot {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: var(--shadow-strong);
+            border: 5px solid var(--accent-gold);
+        }
+        
+        .headshot-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .headshot-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .credential-badge {
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-small);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Navbar Critical CSS */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 29, 63, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-white);
+            text-decoration: none;
+            font-family: var(--font-heading);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--secondary-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0.5rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            border-radius: var(--radius-small);
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--secondary-white);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        
+        /* Mobile Critical CSS */
+        @media (max-width: 768px) {
+            .hero-content .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            
+            .hero-headshot {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .hero-title {
+                font-size: clamp(2.5rem, 10vw, 4rem);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10, 29, 63, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 2.5rem;
+                gap: 1.5rem;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+        }
+        
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation - Redesigned -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="brand-text">JR</span>
-                <span class="brand-tag">Student Empowerment</span>
+                <a href="#hero" class="brand-link">
+                    <span class="brand-text">JR</span>
+                    <span class="brand-tag">Student Empowerment</span>
+                </a>
             </div>
             <div class="nav-menu" id="nav-menu">
                 <a href="#about" class="nav-link">About</a>
-                <a href="#credentials" class="nav-link">Credentials</a>
                 <a href="#services" class="nav-link">Services</a>
-                <a href="#partners" class="nav-link">Partners</a>
-                <a href="#contact" class="nav-link contact-cta">Say Hello</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link contact-cta">Contact</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -43,11 +369,10 @@
         </div>
     </nav>
 
-    <!-- Hero Section - Ultra Modern -->
+    <!-- Hero Section - Redesigned -->
     <section class="hero" id="hero">
         <div class="hero-background">
-            <div class="hero-grid"></div>
-            <div class="hero-particles"></div>
+            <div class="hero-gradient-overlay"></div>
         </div>
         
         <div class="hero-content">
@@ -69,24 +394,9 @@
                         Empowering students to break free from rigid academic expectations.
                     </p>
                     
-                    <div class="hero-stats">
-                        <div class="stat">
-                            <span class="stat-number">10,000+</span>
-                            <span class="stat-label">Students Connected</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">100+</span>
-                            <span class="stat-label">Events Hosted</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-number">1st</span>
-                            <span class="stat-label">Class Honours</span>
-                        </div>
-                    </div>
-                    
                     <div class="hero-cta">
                         <a href="#contact" class="cta-primary">
-                            <span>Start Your Journey</span>
+                            <span>Work With Me</span>
                             <div class="cta-arrow">
                                 <i class="fas fa-arrow-right"></i>
                             </div>
@@ -99,71 +409,18 @@
                 </div>
                 
                 <div class="hero-visual">
-                    <div class="hero-carousel">
-                        <div class="carousel-container">
-                            <div class="carousel-slide active" data-text="Help students thrive on their own terms">
-                                <div class="image-frame">
-                                    <img src="assets/Graduation.jpeg" alt="Josh Robinson - Graduation Portrait" class="hero-image">
-                                    <div class="image-overlay">
-                                        <div class="credential-badge">
-                                            <div class="badge-icon">
-                                                <i class="fas fa-graduation-cap"></i>
-                                            </div>
-                                            <div class="badge-text">
-                                                <span class="badge-title">First-Class Honours</span>
-                                                <span class="badge-subtitle">King's College London</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="hero-headshot">
+                        <img src="assets/St pauls.jpeg" alt="Josh Robinson - Professional Headshot" class="headshot-image" width="350" height="350" loading="eager">
+                        <div class="headshot-overlay">
+                            <div class="credential-badge">
+                                <div class="badge-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="badge-text">
+                                    <span class="badge-title">First-Class Honours</span>
+                                    <span class="badge-subtitle">King's College London</span>
                                 </div>
                             </div>
-                            <div class="carousel-slide" data-text="Building confidence through authentic communication">
-                                <div class="image-frame">
-                                    <img src="assets/St pauls.jpeg" alt="Josh Robinson - Professional Portrait" class="hero-image">
-                                    <div class="image-overlay">
-                                        <div class="credential-badge">
-                                            <div class="badge-icon">
-                                                <i class="fas fa-microphone"></i>
-                                            </div>
-                                            <div class="badge-text">
-                                                <span class="badge-title">100+ Events</span>
-                                                <span class="badge-subtitle">Public Speaking</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="carousel-slide" data-text="Creating communities that empower and inspire">
-                                <div class="image-frame">
-                                    <img src="assets/LUBE FINALS.jpeg" alt="Josh Robinson - Community Building" class="hero-image">
-                                    <div class="image-overlay">
-                                        <div class="credential-badge">
-                                            <div class="badge-icon">
-                                                <i class="fas fa-users"></i>
-                                            </div>
-                                            <div class="badge-text">
-                                                <span class="badge-title">LSN Founder</span>
-                                                <span class="badge-subtitle">10,000+ Students</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-controls">
-                            <button class="carousel-dot active" data-slide="0"></button>
-                            <button class="carousel-dot" data-slide="1"></button>
-                            <button class="carousel-dot" data-slide="2"></button>
-                        </div>
-                    </div>
-                    <div class="floating-elements">
-                        <div class="floating-card">
-                            <i class="fas fa-users"></i>
-                            <span>LSN Founder</span>
-                        </div>
-                        <div class="floating-card">
-                            <i class="fas fa-microphone"></i>
-                            <span>100+ Events</span>
                         </div>
                     </div>
                 </div>
@@ -176,7 +433,7 @@
         </div>
     </section>
 
-    <!-- About Section - Ultra Modern -->
+    <!-- About Section - Redesigned -->
     <section class="about" id="about">
         <div class="container">
             <div class="section-header">
@@ -211,24 +468,178 @@
                     </div>
                 </div>
                 
-                <div class="about-visual">
-                    <div class="about-image-container">
-                        <div class="image-frame">
-                            <img src="assets/St pauls.jpeg" alt="Josh Robinson - Professional Portrait" class="about-image">
+                <div class="about-stats">
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <div class="about-cards">
-                            <div class="about-card">
-                                <i class="fas fa-graduation-cap"></i>
-                                <h4>First-Class Honours</h4>
-                                <p>King's College London</p>
+                        <div class="stats-content">
+                            <h3 class="stats-number">10,000+</h3>
+                            <p class="stats-label">Students Helped</p>
+                            <p class="stats-description">Connected through London Student Network</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="stats-content">
+                            <h3 class="stats-number">100+</h3>
+                            <p class="stats-label">Workshops</p>
+                            <p class="stats-description">Delivered across schools and universities</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <div class="stats-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="stats-content">
+                            <h3 class="stats-number">1st</h3>
+                            <p class="stats-label">Class Degree</p>
+                            <p class="stats-description">War Studies & History, King's College London</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section - Redesigned -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>04</span>
+                    <span>Testimonials</span>
+                </div>
+                <h2 class="section-title">What students and educators say</h2>
+                <p class="section-subtitle">
+                    Real feedback from real people whose lives have been transformed
+                </p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonials-track">
+                    <div class="testimonial-slide active" data-slide="1">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
                             </div>
-                            <div class="about-card">
-                                <i class="fas fa-users"></i>
-                                <h4>10,000+ Students</h4>
-                                <p>Connected through LSN</p>
+                            <blockquote class="testimonial-quote">
+                                "Josh completely transformed how I approach my studies. His ADHD-friendly techniques 
+                                helped me finally understand how to organize my work and manage my time effectively. 
+                                I went from barely passing to achieving A's in my A-Levels."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name">Sarah Chen</h4>
+                                    <p class="author-role">A-Level Student, History & Politics</p>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="testimonial-slide" data-slide="2">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <blockquote class="testimonial-quote">
+                                "The confidence workshop Josh ran for our Year 11 students was incredible. 
+                                Students who were terrified of public speaking were volunteering to present 
+                                by the end of the session. His energy and practical approach made all the difference."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name">Mr. David Thompson</h4>
+                                    <p class="author-role">Head of Sixth Form, St. Mary's Academy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide" data-slide="3">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <blockquote class="testimonial-quote">
+                                "As president of our university's debate society, I've seen Josh's impact firsthand. 
+                                His coaching sessions helped our team win the regional championships. 
+                                He doesn't just teach skills—he builds confidence and community."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name">Emma Rodriguez</h4>
+                                    <p class="author-role">Debate Society President, King's College London</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonials-controls">
+                    <button class="slider-dot active" data-slide="1" aria-label="Go to testimonial 1">
+                        <span class="dot-fill"></span>
+                    </button>
+                    <button class="slider-dot" data-slide="2" aria-label="Go to testimonial 2">
+                        <span class="dot-fill"></span>
+                    </button>
+                    <button class="slider-dot" data-slide="3" aria-label="Go to testimonial 3">
+                        <span class="dot-fill"></span>
+                    </button>
+                </div>
+                
+                <button class="slider-nav prev" aria-label="Previous testimonial">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-nav next" aria-label="Next testimonial">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Client Logos Section -->
+    <section class="client-logos" id="clients">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <span>05</span>
+                    <span>Trusted By</span>
+                </div>
+                <h2 class="section-title">Trusted by top universities</h2>
+                <p class="section-subtitle">
+                    Working with leading educational institutions across the UK
+                </p>
+            </div>
+            
+            <div class="logos-container">
+                <div class="logo-item">
+                    <img src="assets/Logo - KCL.jpeg" alt="King's College London" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - UCL.jpeg" alt="University College London" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - LSE.jpeg" alt="London School of Economics" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - Imperial.jpeg" alt="Imperial College London" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - Oxford.jpeg" alt="University of Oxford" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - Cambridge.jpeg" alt="University of Cambridge" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - Durham.jpeg" alt="Durham University" class="client-logo" loading="lazy" width="180" height="90">
+                </div>
+                <div class="logo-item">
+                    <img src="assets/Logo - Warwick.jpeg" alt="University of Warwick" class="client-logo" loading="lazy" width="180" height="90">
                 </div>
             </div>
         </div>
@@ -310,7 +721,7 @@
                         <h3 class="category-title">Personal Development</h3>
                     </div>
                     <ul class="credentials-list">
-                        <li><i class="fas fa-check"></i><span>ADHD Diagnosis - Coping Strategies Specialist</span></li>
+                        <li><i class="fas fa-check"></i><span>ADHD Coping Strategies</span></li>
                         <li><i class="fas fa-utensils"></i><span>Michelin Star Trained Chef - Worked Hard</span></li>
                         <li><i class="fas fa-music"></i><span>Self-Taught Piano in Lockdown</span></li>
                         <li><i class="fas fa-plane"></i><span>Backpacker</span></li>
@@ -321,12 +732,12 @@
         </div>
     </section>
 
-    <!-- Services Section - Ultra Modern -->
+    <!-- Services Section - Redesigned -->
     <section class="services" id="services">
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">
-                    <span>04</span>
+                    <span>03</span>
                     <span>Services</span>
                 </div>
                 <h2 class="section-title">Comprehensive support for every stage of your journey</h2>
@@ -336,95 +747,74 @@
             </div>
             
             <div class="services-grid">
-                <div class="service-card featured">
-                    <div class="service-badge">Most Popular</div>
-                    <div class="service-header">
-                        <div class="service-icon">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <h3 class="service-title">🎓 Tutoring Services</h3>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-graduate"></i>
                     </div>
-                    <p class="service-description">
-                        Personalized support that transforms how you approach learning, thinking, and expressing yourself.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i>1:1 Academic Tutoring (£30/h)</li>
-                        <li><i class="fas fa-check"></i>University Admissions & Personal Statements</li>
-                        <li><i class="fas fa-check"></i>Public Speaking & Communication Coaching</li>
-                        <li><i class="fas fa-check"></i>Essay & Coursework Mentorship</li>
-                        <li><i class="fas fa-check"></i>ADHD-Friendly Study Coaching</li>
-                    </ul>
+                    <h3 class="service-title">Tutoring</h3>
+                    <p class="service-tagline">Personalized 1:1 support that transforms how you learn</p>
+                    <div class="service-features">
+                        <span class="feature-tag">Academic Tutoring</span>
+                        <span class="feature-tag">University Admissions</span>
+                        <span class="feature-tag">Public Speaking</span>
+                        <span class="feature-tag">ADHD Support</span>
+                    </div>
                     <div class="service-cta">
-                        <a href="tutoring.html" class="service-button">Learn More</a>
+                        <a href="tutoring.html" class="service-button">Enquire</a>
                         <span class="service-price">From £30/hour</span>
                     </div>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <h3 class="service-title">🧠 Workshop Services</h3>
+                    <div class="service-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
                     </div>
-                    <p class="service-description">
-                        Interactive, high-energy sessions that leave students inspired and equipped with practical skills.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i>Confidence & Communication (£200 half-day)</li>
-                        <li><i class="fas fa-check"></i>Thriving with ADHD (£200 half-day)</li>
-                        <li><i class="fas fa-check"></i>Making the Most of University (£300 full-day)</li>
-                        <li><i class="fas fa-check"></i>Debate Like a Pro (£200 half-day)</li>
-                        <li><i class="fas fa-check"></i>UCAS & Personal Statement Deep Dive (£200 half-day)</li>
-                    </ul>
+                    <h3 class="service-title">Workshops</h3>
+                    <p class="service-tagline">Interactive sessions that inspire and equip students</p>
+                    <div class="service-features">
+                        <span class="feature-tag">Confidence Building</span>
+                        <span class="feature-tag">ADHD Support</span>
+                        <span class="feature-tag">University Prep</span>
+                        <span class="feature-tag">Debate Skills</span>
+                    </div>
                     <div class="service-cta">
-                        <a href="workshops.html" class="service-button">Learn More</a>
+                        <a href="workshops.html" class="service-button">Enquire</a>
                         <span class="service-price">From £200 half-day</span>
                     </div>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">
-                            <i class="fas fa-microphone-alt"></i>
-                        </div>
-                        <h3 class="service-title">Speaking & Events</h3>
+                    <div class="service-icon">
+                        <i class="fas fa-microphone-alt"></i>
                     </div>
-                    <p class="service-description">
-                        Keynotes, panels, and talks that inspire audiences to take action and embrace their potential.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i>Student motivation keynotes</li>
-                        <li><i class="fas fa-check"></i>Educational transformation talks</li>
-                        <li><i class="fas fa-check"></i>Panel discussions & moderation</li>
-                        <li><i class="fas fa-check"></i>Youth engagement sessions</li>
-                        <li><i class="fas fa-check"></i>Virtual & in-person delivery</li>
-                    </ul>
+                    <h3 class="service-title">Speaking</h3>
+                    <p class="service-tagline">Keynotes and talks that inspire action</p>
+                    <div class="service-features">
+                        <span class="feature-tag">Student Motivation</span>
+                        <span class="feature-tag">Educational Talks</span>
+                        <span class="feature-tag">Panel Discussions</span>
+                        <span class="feature-tag">Youth Engagement</span>
+                    </div>
                     <div class="service-cta">
-                        <a href="#contact" class="service-button">Get Quote</a>
+                        <a href="#contact" class="service-button">Enquire</a>
                         <span class="service-price">Starting £500</span>
                     </div>
                 </div>
 
                 <div class="service-card">
-                    <div class="service-header">
-                        <div class="service-icon">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <h3 class="service-title">Content & Strategy</h3>
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
                     </div>
-                    <p class="service-description">
-                        Strategic content creation and social media guidance that builds authentic student brands.
-                    </p>
-                    <ul class="service-features">
-                        <li><i class="fas fa-check"></i>Personal brand development</li>
-                        <li><i class="fas fa-check"></i>Content strategy for students</li>
-                        <li><i class="fas fa-check"></i>Social media optimization</li>
-                        <li><i class="fas fa-check"></i>Community building tactics</li>
-                        <li><i class="fas fa-check"></i>Digital presence audits</li>
-                    </ul>
+                    <h3 class="service-title">Brand Collabs</h3>
+                    <p class="service-tagline">Strategic content and social media guidance</p>
+                    <div class="service-features">
+                        <span class="feature-tag">Personal Branding</span>
+                        <span class="feature-tag">Content Strategy</span>
+                        <span class="feature-tag">Social Media</span>
+                        <span class="feature-tag">Community Building</span>
+                    </div>
                     <div class="service-cta">
-                        <a href="#contact" class="service-button">Learn More</a>
+                        <a href="#contact" class="service-button">Enquire</a>
                         <span class="service-price">Package deals</span>
                     </div>
                 </div>
@@ -448,42 +838,42 @@
             
             <div class="partners-grid">
                 <div class="partner-item">
-                    <img src="assets/Logo - LSN.jpeg" alt="London Student Network" class="partner-logo">
+                    <img src="assets/Logo - LSN.jpeg" alt="London Student Network" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>London Student Network</h4>
                     <p>Founder & CEO</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - KCL Politics.jpeg" alt="King's Politics Society" class="partner-logo">
+                    <img src="assets/Logo - KCL Politics.jpeg" alt="King's Politics Society" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>King's Politics Society</h4>
                     <p>President & VP</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - KCL.jpeg" alt="King's College London" class="partner-logo">
+                    <img src="assets/Logo - KCL.jpeg" alt="King's College London" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>King's College London</h4>
                     <p>Alumni & Guest Speaker</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - Trent College.jpeg" alt="Trent College" class="partner-logo">
+                    <img src="assets/Logo - Trent College.jpeg" alt="Trent College" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>Trent College</h4>
                     <p>Head of School</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - Derby College.jpeg" alt="Derby College" class="partner-logo">
+                    <img src="assets/Logo - Derby College.jpeg" alt="Derby College" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>Derby College</h4>
                     <p>Workshop Facilitator</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - St George's.jpeg" alt="St George's" class="partner-logo">
+                    <img src="assets/Logo - St George's.jpeg" alt="St George's" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>St George's</h4>
                     <p>Guest Speaker</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - Highbury.jpeg" alt="Highbury" class="partner-logo">
+                    <img src="assets/Logo - Highbury.jpeg" alt="Highbury" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>Highbury</h4>
                     <p>Mentorship Program</p>
                 </div>
                 <div class="partner-item">
-                    <img src="assets/Logo - LUBE.jpeg" alt="LUBE" class="partner-logo">
+                    <img src="assets/Logo - LUBE.jpeg" alt="LUBE" class="partner-logo" loading="lazy" width="120" height="60">
                     <h4>LUBE</h4>
                     <p>Competition Executive</p>
                 </div>
@@ -546,7 +936,7 @@
                             </div>
                             <div class="method-content">
                                 <h4>Email</h4>
-                                <p>hello@joshrobinson.uk</p>
+                                <p>josh@joshrobinson.uk</p>
                                 <span>Usually respond within 24 hours</span>
                             </div>
                         </div>
@@ -604,7 +994,7 @@
                             <a href="https://linkedin.com/in/joshrobinson" target="_blank" aria-label="LinkedIn">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                            <a href="mailto:hello@joshrobinson.uk" aria-label="Email">
+                            <a href="mailto:josh@joshrobinson.uk" aria-label="Email">
                                 <i class="fas fa-envelope"></i>
                             </a>
                         </div>

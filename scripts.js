@@ -15,17 +15,38 @@ let lastScrollY = window.scrollY;
 function handleNavbarScroll() {
     const currentScrollY = window.scrollY;
     
-    if (currentScrollY > 100) {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.backdropFilter = 'blur(30px)';
-        navbar.style.boxShadow = '0 4px 20px rgba(10, 29, 63, 0.1)';
+    if (currentScrollY > 50) {
+        navbar.classList.add('scrolled');
     } else {
-        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        navbar.style.backdropFilter = 'blur(30px)';
-        navbar.style.boxShadow = '0 1px 3px rgba(10, 29, 63, 0.1)';
+        navbar.classList.remove('scrolled');
     }
     
+    // Update active nav link based on scroll position
+    updateActiveNavLink();
+    
     lastScrollY = currentScrollY;
+}
+
+// ===== ACTIVE NAV LINK HIGHLIGHTING =====
+function updateActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let current = '';
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
 }
 
 // Throttled scroll handler for better performance
@@ -47,18 +68,12 @@ function toggleMobileMenu() {
     navMenu.classList.toggle('active');
     hamburger.classList.toggle('active');
     
-    // Animate hamburger
-    const spans = hamburger.querySelectorAll('span');
-    spans.forEach((span, index) => {
-        if (hamburger.classList.contains('active')) {
-            if (index === 0) span.style.transform = 'rotate(45deg) translate(5px, 5px)';
-            if (index === 1) span.style.opacity = '0';
-            if (index === 2) span.style.transform = 'rotate(-45deg) translate(7px, -6px)';
-        } else {
-            span.style.transform = 'none';
-            span.style.opacity = '1';
-        }
-    });
+    // Prevent body scroll when menu is open
+    if (navMenu.classList.contains('active')) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = '';
+    }
 }
 
 hamburger.addEventListener('click', toggleMobileMenu);
@@ -68,11 +83,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
-        const spans = hamburger.querySelectorAll('span');
-        spans.forEach(span => {
-            span.style.transform = 'none';
-            span.style.opacity = '1';
-        });
+        document.body.style.overflow = '';
     });
 });
 
@@ -363,10 +374,21 @@ setupOptimizedHeroCarousel();
 // ===== OPTIMIZED TYPING ANIMATION =====
 function setupOptimizedTypingAnimation() {
     const phrases = [
-        "on their own terms",
-        "with confidence", 
-        "beyond expectations",
-        "with purpose"
+        "build confidence",
+        "find your voice", 
+        "achieve excellence",
+        "unlock potential",
+        "transform learning",
+        "develop skills",
+        "create connections",
+        "excel academically",
+        "navigate university",
+        "thrive anywhere",
+        "overcome challenges",
+        "think critically",
+        "build friendships",
+        "discover yourself",
+        "succeed always"
     ];
     
     const typingElement = document.querySelector('.title-highlight');
@@ -608,8 +630,157 @@ if ('ontouchstart' in window) {
     document.body.classList.add('touch-device');
 }
 
+// ===== TESTIMONIALS SLIDER FUNCTIONALITY =====
+function setupTestimonialsSlider() {
+    const slider = document.querySelector('.testimonials-slider');
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.testimonial-slide');
+    const dots = slider.querySelectorAll('.slider-dot');
+    const prevBtn = slider.querySelector('.slider-nav.prev');
+    const nextBtn = slider.querySelector('.slider-nav.next');
+    
+    let currentSlide = 0;
+    let isTransitioning = false;
+    let autoPlayInterval;
+    
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    function showSlide(index) {
+        if (isTransitioning || index === currentSlide) return;
+        
+        isTransitioning = true;
+        
+        // Remove active class from current slide and dot
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        
+        // Update current slide index
+        currentSlide = index;
+        
+        // Add active class to new slide and dot
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        
+        // Reset transition flag after animation
+        setTimeout(() => {
+            isTransitioning = false;
+        }, prefersReducedMotion ? 100 : 500);
+    }
+    
+    function nextSlide() {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+    }
+    
+    function prevSlide() {
+        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    }
+    
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+            resetAutoPlay();
+        });
+    });
+    
+    // Arrow navigation
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoPlay();
+        });
+    }
+    
+    // Keyboard navigation
+    slider.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+            resetAutoPlay();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+            resetAutoPlay();
+        }
+    });
+    
+    // Touch/swipe support for mobile
+    let startX = 0;
+    let endX = 0;
+    
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    slider.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+            resetAutoPlay();
+        }
+    }
+    
+    // Auto-play functionality (disabled if reduced motion is preferred)
+    function startAutoPlay() {
+        if (prefersReducedMotion) return;
+        
+        autoPlayInterval = setInterval(() => {
+            nextSlide();
+        }, 5000);
+    }
+    
+    function resetAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            startAutoPlay();
+        }
+    }
+    
+    function stopAutoPlay() {
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+        }
+    }
+    
+    // Pause auto-play on hover/focus
+    slider.addEventListener('mouseenter', stopAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
+    slider.addEventListener('focusin', stopAutoPlay);
+    slider.addEventListener('focusout', startAutoPlay);
+    
+    // Start auto-play
+    startAutoPlay();
+    
+    // Make slider focusable for accessibility
+    slider.setAttribute('tabindex', '0');
+}
+
+// Initialize testimonials slider
+setupTestimonialsSlider();
+
 // ===== WEBSITE READY =====
 console.log('✅ Josh Robinson website optimized and ready for production');
 console.log('🚀 Performance optimizations applied');
 console.log('📱 Mobile optimizations enabled');
 console.log('🎨 Typing animation restored with better performance');
+console.log('💬 Testimonials slider with accessibility features');
