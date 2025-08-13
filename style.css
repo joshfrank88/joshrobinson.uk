@@ -90,7 +90,7 @@
     }
     
     .services-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
         padding: 0 1rem;
     }
@@ -127,6 +127,10 @@
         max-width: 100%;
         margin: 2rem auto 0;
         padding: 0 1rem;
+    }
+    
+    .testimonials-track {
+        height: 350px;
     }
     
     .testimonial-content {
@@ -509,10 +513,7 @@ p {
     letter-spacing: 2px;
 }
 
-.section-badge span:first-child {
-    font-size: 1.2rem;
-    font-weight: 700;
-}
+
 
 .section-title {
     color: var(--primary-navy);
@@ -1371,8 +1372,8 @@ p {
 
 /* ===== CREDENTIALS SECTION ===== */
 .credentials {
-    background: var(--primary-navy);
-    color: var(--secondary-white);
+    background: var(--secondary-white);
+    color: var(--primary-navy);
     padding: var(--section-padding);
 }
 
@@ -1383,7 +1384,7 @@ p {
 
 .credentials .section-title,
 .credentials .section-subtitle {
-    color: var(--secondary-white);
+    color: var(--primary-navy);
 }
 
 .credentials-grid {
@@ -1396,15 +1397,15 @@ p {
 }
 
 .credential-category {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(10, 29, 63, 0.05);
     padding: 3rem;
     border-radius: var(--radius-large);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(10, 29, 63, 0.1);
     transition: all var(--transition-fast);
 }
 
 .credential-category:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(10, 29, 63, 0.08);
     transform: translateY(-5px);
 }
 
@@ -1428,7 +1429,7 @@ p {
 }
 
 .category-title {
-    color: var(--secondary-white);
+    color: var(--primary-navy);
     font-family: var(--font-heading);
     font-size: 1.8rem;
     margin: 0;
@@ -1443,9 +1444,10 @@ p {
     align-items: flex-start;
     gap: 1rem;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(10, 29, 63, 0.1);
     font-size: 1.1rem;
     line-height: 1.6;
+    color: var(--primary-navy);
 }
 
 .credentials-list li:last-child {
@@ -1478,7 +1480,7 @@ p {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     margin-top: 4rem;
     opacity: 0;
@@ -1655,8 +1657,9 @@ p {
 
 /* ===== TESTIMONIALS SECTION ===== */
 .testimonials {
-    background: var(--secondary-white);
+    background: var(--primary-navy);
     padding: var(--section-padding);
+    color: var(--secondary-white);
 }
 
 .testimonials-slider {
@@ -1670,28 +1673,50 @@ p {
     position: relative;
     display: flex;
     transition: transform 0.5s ease;
+    height: 400px;
 }
 
 .testimonial-slide {
     min-width: 100%;
     opacity: 0;
-    transform: translateX(100%);
-    transition: all 0.5s ease;
+    transform: translateX(100%) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: blur(2px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .testimonial-slide.active {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+    z-index: 10;
+}
+
+.testimonial-slide.prev {
+    opacity: 0.3;
+    transform: translateX(-50px) scale(0.9);
+    filter: blur(1px);
+}
+
+.testimonial-slide.next {
+    opacity: 0.3;
+    transform: translateX(50px) scale(0.9);
+    filter: blur(1px);
 }
 
 .testimonial-content {
-    background: var(--primary-navy);
+    background: rgba(255, 255, 255, 0.1);
     color: var(--secondary-white);
     padding: 3rem;
     border-radius: var(--radius-large);
     text-align: center;
     position: relative;
     box-shadow: var(--shadow-strong);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .quote-icon {
