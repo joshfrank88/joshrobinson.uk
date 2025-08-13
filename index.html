@@ -140,10 +140,16 @@
             display: inline-block;
         }
         
-        .title-highlight::after {
-            content: '|';
+        .title-highlight.typing::before {
+            content: '';
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 1.2em;
+            background: var(--accent-gold);
             animation: blink 1s infinite;
-            color: var(--accent-gold);
         }
         
         @keyframes blink {
@@ -359,6 +365,8 @@
                 <a href="#about" class="nav-link">About</a>
                 <a href="#services" class="nav-link">Services</a>
                 <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="tutoring.html" class="nav-link">Tutoring</a>
+                <a href="workshops.html" class="nav-link">Workshops</a>
                 <a href="#contact" class="nav-link contact-cta">Contact</a>
             </div>
             <div class="hamburger" id="hamburger">
@@ -396,7 +404,7 @@
                     
                     <div class="hero-cta">
                         <a href="#contact" class="cta-primary">
-                            <span>Work With Me</span>
+                            <span>Say Hello</span>
                             <div class="cta-arrow">
                                 <i class="fas fa-arrow-right"></i>
                             </div>
@@ -409,18 +417,61 @@
                 </div>
                 
                 <div class="hero-visual">
-                    <div class="hero-headshot">
-                        <img src="assets/St pauls.jpeg" alt="Josh Robinson - Professional Headshot" class="headshot-image" width="350" height="350" loading="eager">
-                        <div class="headshot-overlay">
-                            <div class="credential-badge">
-                                <div class="badge-icon">
-                                    <i class="fas fa-graduation-cap"></i>
-                                </div>
-                                <div class="badge-text">
-                                    <span class="badge-title">First-Class Honours</span>
-                                    <span class="badge-subtitle">King's College London</span>
+                    <div class="hero-carousel">
+                        <div class="carousel-container">
+                            <div class="carousel-slide active" data-slide="1">
+                                <img src="assets/St pauls.jpeg" alt="Josh Robinson - Professional Headshot" class="hero-image" loading="eager">
+                                <div class="carousel-overlay">
+                                    <div class="credential-badge">
+                                        <div class="badge-icon">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                        <div class="badge-text">
+                                            <span class="badge-title">First-Class Honours</span>
+                                            <span class="badge-subtitle">King's College London</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="carousel-slide" data-slide="2">
+                                <img src="assets/Graduation.jpeg" alt="Josh Robinson - Graduation" class="hero-image" loading="lazy">
+                                <div class="carousel-overlay">
+                                    <div class="credential-badge">
+                                        <div class="badge-icon">
+                                            <i class="fas fa-users"></i>
+                                        </div>
+                                        <div class="badge-text">
+                                            <span class="badge-title">10,000+ Students</span>
+                                            <span class="badge-subtitle">London Student Network</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-slide" data-slide="3">
+                                <img src="assets/LUBE FINALS.jpeg" alt="Josh Robinson - Debate Finals" class="hero-image" loading="lazy">
+                                <div class="carousel-overlay">
+                                    <div class="credential-badge">
+                                        <div class="badge-icon">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <div class="badge-text">
+                                            <span class="badge-title">Debate Champion</span>
+                                            <span class="badge-subtitle">LUBE Finals Winner</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-dot active" data-slide="1" aria-label="Go to slide 1">
+                                <span class="dot-fill"></span>
+                            </button>
+                            <button class="carousel-dot" data-slide="2" aria-label="Go to slide 2">
+                                <span class="dot-fill"></span>
+                            </button>
+                            <button class="carousel-dot" data-slide="3" aria-label="Go to slide 3">
+                                <span class="dot-fill"></span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -578,6 +629,44 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="testimonial-slide" data-slide="4">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <blockquote class="testimonial-quote">
+                                "Josh's UCAS workshop was a game-changer for our Year 13 students. 
+                                He demystified the personal statement process and gave them the confidence 
+                                to write authentically. Several students received offers from their dream universities."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name">Mrs. Jennifer Walsh</h4>
+                                    <p class="author-role">Head of Sixth Form, St. Mary's Academy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide" data-slide="5">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <blockquote class="testimonial-quote">
+                                "I was struggling with my History A-Level until I started working with Josh. 
+                                His approach to essay writing and source analysis completely transformed my grades. 
+                                He made complex topics accessible and helped me find my academic voice."
+                            </blockquote>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name">Alex Thompson</h4>
+                                    <p class="author-role">A-Level Student, History & Politics</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="testimonials-controls">
@@ -588,6 +677,12 @@
                         <span class="dot-fill"></span>
                     </button>
                     <button class="slider-dot" data-slide="3" aria-label="Go to testimonial 3">
+                        <span class="dot-fill"></span>
+                    </button>
+                    <button class="slider-dot" data-slide="4" aria-label="Go to testimonial 4">
+                        <span class="dot-fill"></span>
+                    </button>
+                    <button class="slider-dot" data-slide="5" aria-label="Go to testimonial 5">
                         <span class="dot-fill"></span>
                     </button>
                 </div>
@@ -602,48 +697,7 @@
         </div>
     </section>
 
-    <!-- Client Logos Section -->
-    <section class="client-logos" id="clients">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <span>05</span>
-                    <span>Trusted By</span>
-                </div>
-                <h2 class="section-title">Trusted by top universities</h2>
-                <p class="section-subtitle">
-                    Working with leading educational institutions across the UK
-                </p>
-            </div>
-            
-            <div class="logos-container">
-                <div class="logo-item">
-                    <img src="assets/Logo - KCL.jpeg" alt="King's College London" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - UCL.jpeg" alt="University College London" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - LSE.jpeg" alt="London School of Economics" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - Imperial.jpeg" alt="Imperial College London" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - Oxford.jpeg" alt="University of Oxford" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - Cambridge.jpeg" alt="University of Cambridge" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - Durham.jpeg" alt="Durham University" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-                <div class="logo-item">
-                    <img src="assets/Logo - Warwick.jpeg" alt="University of Warwick" class="client-logo" loading="lazy" width="180" height="90">
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Credentials Section - Ultra Modern -->
     <section class="credentials" id="credentials">
@@ -797,7 +851,7 @@
                     </div>
                     <div class="service-cta">
                         <a href="#contact" class="service-button">Enquire</a>
-                        <span class="service-price">Starting £500</span>
+                        <span class="service-price">Starting £200</span>
                     </div>
                 </div>
 

@@ -404,6 +404,9 @@ function setupOptimizedTypingAnimation() {
     function type() {
         const currentPhrase = phrases[phraseIndex];
         
+        // Add typing class to show cursor
+        typingElement.classList.add('typing');
+        
         if (isDeleting) {
             typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
             charIndex--;
@@ -421,6 +424,8 @@ function setupOptimizedTypingAnimation() {
             isDeleting = false;
             phraseIndex = (phraseIndex + 1) % phrases.length;
             speed = 800;
+            // Remove typing class when starting new phrase
+            typingElement.classList.remove('typing');
         }
         
         setTimeout(type, speed);
