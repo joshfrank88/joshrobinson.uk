@@ -367,7 +367,7 @@
                 <a href="#testimonials" class="nav-link">Testimonials</a>
                 <a href="tutoring.html" class="nav-link">Tutoring</a>
                 <a href="workshops.html" class="nav-link">Workshops</a>
-                <a href="#contact" class="nav-link contact-cta">Contact</a>
+                <a href="#" onclick="openContactModal()" class="nav-link contact-cta">Contact</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -403,7 +403,7 @@
                     </p>
                     
                     <div class="hero-cta">
-                        <a href="#contact" class="cta-primary">
+                        <a href="#" onclick="openContactModal()" class="cta-primary">
                             <span>Say Hello</span>
                             <i class="fas fa-arrow-right"></i>
                         </a>
@@ -1093,7 +1093,7 @@
                                 <span>Daily content & updates</span>
                             </div>
                         </div>
-                        <div class="contact-method">
+                        <div class="contact-method" onclick="openContactModal()" style="cursor: pointer;">
                             <div class="method-icon">
                                 <i class="fas fa-calendar"></i>
                             </div>
@@ -1159,7 +1159,7 @@
                             <li><a href="#about">My Story</a></li>
                             <li><a href="#credentials">Credentials</a></li>
                             <li><a href="#partners">Partners</a></li>
-                            <li><a href="#contact">Work With Me</a></li>
+                            <li><a href="#" onclick="openContactModal()">Work With Me</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1169,6 +1169,59 @@
             </div>
         </div>
     </footer>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeContactModal()"></div>
+        <div class="modal-content contact-modal">
+            <div class="modal-header">
+                <h3>Let's Connect!</h3>
+                <p>Tell me about your goals and how I can help you or your students thrive.</p>
+                <button onclick="closeContactModal()" class="modal-close" aria-label="Close modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="contactForm" class="contact-form" onsubmit="submitContactForm(event)">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Interest</label>
+                    <select id="service" name="service">
+                        <option value="">Select a service...</option>
+                        <option value="1-1-tutoring">1:1 Academic Tutoring</option>
+                        <option value="university-admissions">University Admissions & Personal Statements</option>
+                        <option value="public-speaking">Public Speaking & Communication Coaching</option>
+                        <option value="essay-mentorship">Essay & Coursework Mentorship</option>
+                        <option value="adhd-coaching">ADHD-Friendly Study Coaching</option>
+                        <option value="confidence-workshop">Confidence & Communication Workshop</option>
+                        <option value="adhd-workshop">Thriving with ADHD Workshop</option>
+                        <option value="university-workshop">Making the Most of University Workshop</option>
+                        <option value="debate-workshop">Debate Like a Pro Workshop</option>
+                        <option value="ucas-workshop">UCAS & Personal Statement Deep Dive</option>
+                        <option value="success-skills">Build Your Own Path: Modern Success Skills</option>
+                        <option value="speaking-event">Speaking Event</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Tell me about your goals, challenges, or what you'd like to explore..." required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="submit-button">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <!-- Success Modal -->
     <div id="successModal" class="modal hidden">

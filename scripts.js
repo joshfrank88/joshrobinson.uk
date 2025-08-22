@@ -789,3 +789,62 @@ console.log('🚀 Performance optimizations applied');
 console.log('📱 Mobile optimizations enabled');
 console.log('🎨 Typing animation restored with better performance');
 console.log('💬 Testimonials slider with accessibility features');
+
+// ===== CONTACT MODAL FUNCTIONS =====
+
+function openContactModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    
+    // Focus on first input
+    setTimeout(() => {
+        const firstInput = modal.querySelector('input');
+        if (firstInput) firstInput.focus();
+    }, 100);
+}
+
+function closeContactModal() {
+    const modal = document.getElementById('contactModal');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+    
+    // Reset form
+    const form = document.getElementById('contactForm');
+    if (form) form.reset();
+}
+
+function submitContactForm(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    const submitButton = form.querySelector('.submit-button');
+    const originalText = submitButton.innerHTML;
+    
+    // Show loading state
+    submitButton.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+    submitButton.disabled = true;
+    
+    // Simulate form submission (replace with actual backend integration)
+    setTimeout(() => {
+        // Close contact modal
+        closeContactModal();
+        
+        // Show success modal
+        showSuccessModal();
+        
+        // Reset button
+        submitButton.innerHTML = originalText;
+        submitButton.disabled = false;
+        
+        // Log form data (for development - remove in production)
+        console.log('Contact Form Submission:', {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            service: formData.get('service'),
+            message: formData.get('message')
+        });
+        
+    }, 1500);
+}
