@@ -826,25 +826,42 @@ function submitContactForm(event) {
     submitButton.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
     submitButton.disabled = true;
     
-    // Simulate form submission (replace with actual backend integration)
-    setTimeout(() => {
-        // Close contact modal
-        closeContactModal();
-        
-        // Show success modal
-        showSuccessModal();
-        
+    // Prepare data for API
+    const contactData = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        service: formData.get('service'),
+        message: formData.get('message')
+    };
+    
+    // Send to backend API
+    fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Close contact modal
+            closeContactModal();
+            
+            // Show success modal
+            showSuccessModal();
+        } else {
+            // Show error message
+            alert('Error: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send message. Please try again or email me directly at josh@joshrobinson.uk');
+    })
+    .finally(() => {
         // Reset button
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
-        
-        // Log form data (for development - remove in production)
-        console.log('Contact Form Submission:', {
-            name: formData.get('name'),
-            email: formData.get('email'),
-            service: formData.get('service'),
-            message: formData.get('message')
-        });
-        
-    }, 1500);
+    });
 }
