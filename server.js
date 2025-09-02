@@ -57,7 +57,7 @@ const createTransporter = () => {
     
     if (emailService === 'godaddy') {
         // GoDaddy Essentials email configuration
-        return nodemailer.createTransporter({
+        return nodemailer.createTransport({
             host: 'smtpout.secureserver.net',
             port: 465,
             secure: true, // use SSL
@@ -70,7 +70,7 @@ const createTransporter = () => {
             }
         });
     } else if (emailService === 'outlook') {
-        return nodemailer.createTransporter({
+        return nodemailer.createTransport({
             service: 'outlook',
             auth: {
                 user: process.env.EMAIL_USER,
@@ -82,7 +82,7 @@ const createTransporter = () => {
         });
     } else {
         // Gmail configuration
-        return nodemailer.createTransporter({
+        return nodemailer.createTransport({
             service: 'gmail',
             auth: {
                 user: process.env.EMAIL_USER,
