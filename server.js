@@ -12,7 +12,7 @@ app.use(helmet());
 
 // CORS configuration
 app.use(cors({
-    origin: ['https://joshrobinson.uk', 'http://localhost:8000', 'http://localhost:3000'],
+    origin: ['https://joshrobinson.uk', 'https://*.netlify.app', 'http://localhost:8000', 'http://localhost:3000'],
     credentials: true
 }));
 
@@ -53,16 +53,43 @@ const rateLimiterMiddleware = (req, res, next) => {
 
 // Email transporter setup
 const createTransporter = () => {
-    return nodemailer.createTransporter({
-        service: 'outlook',
-        auth: {
-            user: process.env.EMAIL_USER || 'josh@joshrobinson.uk',
-            pass: process.env.EMAIL_PASSWORD
-        },
-        tls: {
-            ciphers: 'SSLv3'
-        }
-    });
+    const emailService = process.env.EMAIL_SERVICE || 'gmail';
+    
+    if (emailService === 'godaddy') {
+        // GoDaddy Essentials email configuration
+        return nodemailer.createTransporter({
+            host: 'smtpout.secureserver.net',
+            port: 465,
+            secure: true, // use SSL
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASSWORD
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
+    } else if (emailService === 'outlook') {
+        return nodemailer.createTransporter({
+            service: 'outlook',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASSWORD
+            },
+            tls: {
+                ciphers: 'SSLv3'
+            }
+        });
+    } else {
+        // Gmail configuration
+        return nodemailer.createTransporter({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASSWORD
+            }
+        });
+    }
 };
 
 // Contact form endpoint

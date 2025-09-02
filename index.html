@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head
+>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Josh Robinson - Student Success Coach | Academic Tutoring & Workshops</title>
@@ -1040,7 +1041,7 @@
             
             <div class="contact-content">
                 <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
+                    <form class="contact-form" id="contactForm" action="http://localhost:3000/api/contact" method="POST">
                         <div class="form-group">
                             <label for="name">Full Name</label>
                             <input type="text" id="name" name="name" placeholder="What should I call you?" required>
@@ -1181,7 +1182,7 @@
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <form id="contactForm" class="contact-form" onsubmit="submitContactForm(event)">
+            <form id="contactForm" class="contact-form" action="http://localhost:3000/api/contact" method="POST" onsubmit="submitContactForm(event)">
                 <div class="form-group">
                     <label for="name">Name *</label>
                     <input type="text" id="name" name="name" required>

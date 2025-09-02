@@ -835,7 +835,7 @@ function submitContactForm(event) {
     };
     
     // Send to backend API
-    fetch('/api/contact', {
+    fetch('http://localhost:3000/api/contact', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

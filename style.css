@@ -2048,7 +2048,7 @@ p {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-small);
     background: rgba(255, 255, 255, 0.1);
-    color: var(--secondary-white);
+    color: var(--primary-navy);
     font-family: var(--font-body);
     font-size: 1rem;
     transition: all var(--transition-fast);
@@ -2060,6 +2060,7 @@ p {
     outline: none;
     border-color: var(--accent-gold);
     background: rgba(255, 255, 255, 0.15);
+    color: var(--primary-navy);
 }
 
 .form-group input::placeholder,
