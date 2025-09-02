@@ -835,7 +835,7 @@ function submitContactForm(event) {
     };
     
     // Send to backend API
-    fetch('http://localhost:3000/api/contact', {
+    fetch('https://joshrobinson-uk-backend-emailing.onrender.com/api/contact', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
