@@ -56,18 +56,21 @@ const createTransporter = () => {
     const emailService = process.env.EMAIL_SERVICE || 'gmail';
     
     if (emailService === 'godaddy') {
-        // GoDaddy Essentials email configuration - Alternative server
+        // GoDaddy 365 Essentials uses Microsoft 365 SMTP
         return nodemailer.createTransport({
-            host: 'smtpout.secureserver.net',
-            port: 80,
-            secure: false, // No SSL/TLS
+            host: 'smtp.office365.com',
+            port: 587,
+            secure: false, // Start with TLS
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD
             },
             tls: {
+                ciphers: 'SSLv3',
                 rejectUnauthorized: false
-            }
+            },
+            requireTLS: true,
+            ignoreTLS: false
         });
     } else if (emailService === 'outlook') {
         return nodemailer.createTransport({
