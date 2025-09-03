@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const helmet = require('helmet');
-const { Client } = require('@microsoft/microsoft-graph-client');
+const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
 const app = express();
@@ -173,87 +173,62 @@ Sent from joshrobinson.uk contact form
             `
         };
 
-        // Send email using Microsoft Graph API
-        const graphClient = Client.init({
-            authProvider: (done) => {
-                done(null, process.env.EMAIL_PASSWORD); // Use password as access token for now
-            }
-        });
+        // Configure SendGrid
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-        // Send main email
-        await graphClient.api('/me/sendMail').post({
-            message: {
-                subject: `New Contact Form Submission - ${service || 'General Inquiry'}`,
-                body: {
-                    contentType: 'HTML',
-                    content: mailOptions.html
-                },
-                toRecipients: [
-                    {
-                        emailAddress: {
-                            address: 'josh@joshrobinson.uk'
-                        }
-                    }
-                ],
-                replyTo: [
-                    {
-                        emailAddress: {
-                            address: email
-                        }
-                    }
-                ]
-            }
-        });
+        // Send main email to you
+        const mainEmail = {
+            to: 'josh@joshrobinson.uk',
+            from: 'noreply@joshrobinson.uk', // This will be your verified sender
+            replyTo: email,
+            subject: `New Contact Form Submission - ${service || 'General Inquiry'}`,
+            html: mailOptions.html,
+            text: mailOptions.text
+        };
 
-        // Send confirmation email
-        await graphClient.api('/me/sendMail').post({
-            message: {
-                subject: 'Thanks for reaching out! - Josh Robinson',
-                body: {
-                    contentType: 'HTML',
-                    content: `
-                        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
-                            <div style="background-color: #0A1D3F; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
-                                <h1 style="margin: 0; font-size: 24px;">Thanks for reaching out!</h1>
-                            </div>
-                            
-                            <div style="background-color: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-                                <p style="font-size: 16px; line-height: 1.6; color: #333;">
-                                    Hi ${name},
-                                </p>
-                                
-                                <p style="font-size: 16px; line-height: 1.6; color: #333;">
-                                    Thanks for getting in touch! I've received your message and will get back to you within 24 hours.
-                                </p>
-                                
-                                <p style="font-size: 16px; line-height: 1.6; color: #333;">
-                                    In the meantime, feel free to check out my latest insights on student empowerment and academic success.
-                                </p>
-                                
-                                <div style="text-align: center; margin: 30px 0;">
-                                    <a href="https://joshrobinson.uk" style="background-color: #F5B700; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
-                                        Visit My Website
-                                    </a>
-                                </div>
-                                
-                                <p style="font-size: 14px; color: #666; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-                                    Best regards,<br>
-                                    Josh Robinson<br>
-                                    <a href="mailto:josh@joshrobinson.uk">josh@joshrobinson.uk</a>
-                                </p>
-                            </div>
+        await sgMail.send(mainEmail);
+
+        // Send confirmation email to user
+        const confirmationEmail = {
+            to: email,
+            from: 'noreply@joshrobinson.uk',
+            subject: 'Thanks for reaching out! - Josh Robinson',
+            html: `
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
+                    <div style="background-color: #0A1D3F; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
+                        <h1 style="margin: 0; font-size: 24px;">Thanks for reaching out!</h1>
+                    </div>
+                    
+                    <div style="background-color: white; padding: 30px; border-radius: 0 0 8px 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <p style="font-size: 16px; line-height: 1.6; color: #333;">
+                            Hi ${name},
+                        </p>
+                        
+                        <p style="font-size: 16px; line-height: 1.6; color: #333;">
+                            Thanks for getting in touch! I've received your message and will get back to you within 24 hours.
+                        </p>
+                        
+                        <p style="font-size: 16px; line-height: 1.6; color: #333;">
+                            In the meantime, feel free to check out my latest insights on student empowerment and academic success.
+                        </p>
+                        
+                        <div style="text-align: center; margin: 30px 0;">
+                            <a href="https://joshrobinson.uk" style="background-color: #F5B700; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">
+                                Visit My Website
+                            </a>
                         </div>
-                    `
-                },
-                toRecipients: [
-                    {
-                        emailAddress: {
-                            address: email
-                        }
-                    }
-                ]
-            }
-        });
+                        
+                        <p style="font-size: 14px; color: #666; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                            Best regards,<br>
+                            Josh Robinson<br>
+                            <a href="mailto:josh@joshrobinson.uk">josh@joshrobinson.uk</a>
+                        </p>
+                    </div>
+                </div>
+            `
+        };
+
+        await sgMail.send(confirmationEmail);
 
         res.json({
             success: true,
