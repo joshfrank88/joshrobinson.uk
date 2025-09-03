@@ -834,8 +834,9 @@ function submitContactForm(event) {
         message: formData.get('message')
     };
     
-    // Send to backend API
-    fetch('https://joshrobinson-uk-backend-emailing.onrender.com/api/contact', {
+    // Send to backend API using form action
+    const formAction = event.target.action;
+    fetch(formAction, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
