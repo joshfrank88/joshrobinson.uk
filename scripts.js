@@ -2,6 +2,27 @@
 
 console.log('🚀 Ultra-modern Josh Robinson website loaded with optimized performance');
 
+// ===== LOADING ANIMATION CONTROL =====
+function hideLoadingScreen() {
+    const loadingScreen = document.getElementById('loading-screen');
+    if (loadingScreen) {
+        loadingScreen.classList.add('hidden');
+        // Remove from DOM after animation completes
+        setTimeout(() => {
+            loadingScreen.remove();
+        }, 500);
+    }
+}
+
+// Hide loading screen when page is fully loaded
+window.addEventListener('load', () => {
+    // Add a small delay for smooth transition
+    setTimeout(hideLoadingScreen, 1000);
+});
+
+// Fallback: Hide loading screen after 3 seconds max
+setTimeout(hideLoadingScreen, 3000);
+
 // ===== DOM ELEMENTS =====
 const navbar = document.getElementById('navbar');
 const hamburger = document.getElementById('hamburger');
