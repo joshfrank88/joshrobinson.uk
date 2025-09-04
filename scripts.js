@@ -140,6 +140,52 @@ function setupLazyLoading() {
     });
 }
 
+// ===== SCROLL-TRIGGERED ANIMATIONS - OPTIMIZED =====
+function setupScrollAnimations() {
+    const animationObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        rootMargin: '0px 0px -50px 0px', // Trigger when element is 50px from bottom
+        threshold: 0.1
+    });
+    
+    // Observe all animation elements
+    document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in').forEach(el => {
+        animationObserver.observe(el);
+    });
+}
+
+// ===== PARALLAX EFFECTS - OPTIMIZED =====
+function setupParallax() {
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        const heroBackground = document.querySelector('.hero-background');
+        
+        if (heroBackground) {
+            const rate = scrolled * -0.5; // Parallax speed
+            heroBackground.style.transform = `translateY(${rate}px)`;
+        }
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', requestTick);
+}
+
 // ===== SMOOTH SCROLLING - OPTIMIZED =====
 function setupSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -845,6 +891,12 @@ console.log('💬 Testimonials slider with accessibility features');
 
 // Initialize lazy loading
 setupLazyLoading();
+
+// Initialize scroll animations
+setupScrollAnimations();
+
+// Initialize parallax effects
+setupParallax();
 
 // ===== CONTACT MODAL FUNCTIONS =====
 
