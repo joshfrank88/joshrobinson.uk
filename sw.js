@@ -1,12 +1,26 @@
 const CACHE_NAME = 'josh-robinson-v1.0.0';
-const urlsToCache = [
+const STATIC_CACHE = 'static-v1.0.0';
+const DYNAMIC_CACHE = 'dynamic-v1.0.0';
+const IMAGE_CACHE = 'images-v1.0.0';
+
+// Critical resources for immediate loading
+const CRITICAL_RESOURCES = [
   '/',
   '/index.html',
-  '/tutoring.html',
-  '/workshops.html',
   '/style.css',
   '/scripts.js',
-  '/favicon.ico',
+  '/favicon.ico'
+];
+
+// Static assets for offline use
+const STATIC_RESOURCES = [
+  '/tutoring.html',
+  '/workshops.html',
+  '/manifest.json'
+];
+
+// Image assets with different caching strategies
+const IMAGE_RESOURCES = [
   '/assets/St pauls.jpeg',
   '/assets/Graduation.jpeg',
   '/assets/LUBE FINALS.jpeg',
@@ -20,43 +34,88 @@ const urlsToCache = [
   '/assets/josh-bridge.jpg'
 ];
 
-// Install event - cache resources
+// Install event - cache critical resources first
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => {
-        console.log('📱 Service Worker: Caching app shell');
-        return cache.addAll(urlsToCache);
+    Promise.all([
+      // Cache critical resources immediately
+      caches.open(STATIC_CACHE).then(cache => {
+        console.log('📱 Service Worker: Caching critical resources');
+        return cache.addAll(CRITICAL_RESOURCES);
+      }),
+      // Cache static resources
+      caches.open(STATIC_CACHE).then(cache => {
+        console.log('📱 Service Worker: Caching static resources');
+        return cache.addAll(STATIC_RESOURCES);
+      }),
+      // Cache images in background
+      caches.open(IMAGE_CACHE).then(cache => {
+        console.log('📱 Service Worker: Caching images');
+        return cache.addAll(IMAGE_RESOURCES);
       })
-      .catch(error => {
-        console.error('❌ Service Worker: Cache failed:', error);
-      })
+    ]).catch(error => {
+      console.error('❌ Service Worker: Cache failed:', error);
+    })
   );
 });
 
-// Fetch event - serve from cache when offline
+// Fetch event - advanced caching strategies
 self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = new URL(request.url);
+  
+  // Skip non-GET requests
+  if (request.method !== 'GET') return;
+  
+  // Skip external requests
+  if (url.origin !== location.origin) return;
+  
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request)
+    caches.match(request)
+      .then(cachedResponse => {
+        if (cachedResponse) {
+          // Return cached response
+          return cachedResponse;
+        }
+        
+        // Fetch from network
+        return fetch(request)
           .then(response => {
-            // Cache new responses for next time
-            if (response.status === 200) {
-              const responseClone = response.clone();
-              caches.open(CACHE_NAME)
-                .then(cache => {
-                  cache.put(event.request, responseClone);
-                });
+            // Don't cache non-successful responses
+            if (!response || response.status !== 200) {
+              return response;
             }
+            
+            // Clone response for caching
+            const responseToCache = response.clone();
+            
+            // Choose cache based on resource type
+            let cacheName = DYNAMIC_CACHE;
+            if (request.destination === 'image') {
+              cacheName = IMAGE_CACHE;
+            } else if (request.destination === 'document' || request.destination === 'script' || request.destination === 'style') {
+              cacheName = STATIC_CACHE;
+            }
+            
+            // Cache the response
+            caches.open(cacheName).then(cache => {
+              cache.put(request, responseToCache);
+            });
+            
             return response;
           })
           .catch(() => {
-            // Offline fallback for HTML pages
-            if (event.request.destination === 'document') {
+            // Offline fallback strategies
+            if (request.destination === 'document') {
               return caches.match('/index.html');
             }
+            if (request.destination === 'image') {
+              return caches.match('/assets/placeholder.webp');
+            }
+            return new Response('Offline content not available', {
+              status: 503,
+              statusText: 'Service Unavailable'
+            });
           });
       })
   );

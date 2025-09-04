@@ -975,6 +975,68 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// ===== PERFORMANCE MONITORING =====
+function setupPerformanceMonitoring() {
+    // Core Web Vitals monitoring
+    if ('PerformanceObserver' in window) {
+        // Largest Contentful Paint (LCP)
+        const lcpObserver = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            console.log('📊 LCP:', lastEntry.startTime.toFixed(2) + 'ms');
+            
+            if (lastEntry.startTime > 2500) {
+                console.warn('🐌 LCP is slow (>2.5s)');
+            }
+        });
+        lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
+        
+        // First Input Delay (FID)
+        const fidObserver = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            entries.forEach(entry => {
+                console.log('📊 FID:', entry.processingStart - entry.startTime + 'ms');
+                
+                if (entry.processingStart - entry.startTime > 100) {
+                    console.warn('🐌 FID is slow (>100ms)');
+                }
+            });
+        });
+        fidObserver.observe({ entryTypes: ['first-input'] });
+        
+        // Cumulative Layout Shift (CLS)
+        let clsValue = 0;
+        const clsObserver = new PerformanceObserver((list) => {
+            for (const entry of list.getEntries()) {
+                if (!entry.hadRecentInput) {
+                    clsValue += entry.value;
+                }
+            }
+            console.log('📊 CLS:', clsValue.toFixed(3));
+            
+            if (clsValue > 0.1) {
+                console.warn('🐌 CLS is poor (>0.1)');
+            }
+        });
+        clsObserver.observe({ entryTypes: ['layout-shift'] });
+    }
+    
+    // Resource timing
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const resources = performance.getEntriesByType('resource');
+            const slowResources = resources.filter(r => r.duration > 1000);
+            
+            if (slowResources.length > 0) {
+                console.warn('🐌 Slow resources detected:', slowResources.map(r => ({
+                    name: r.name,
+                    duration: r.duration.toFixed(2) + 'ms'
+                })));
+            }
+        }, 1000);
+    });
+}
+
 // Initialize lazy loading
 setupLazyLoading();
 
@@ -986,6 +1048,9 @@ setupParallax();
 
 // Initialize touch gestures
 setupTouchGestures();
+
+// Initialize performance monitoring
+setupPerformanceMonitoring();
 
 // ===== CONTACT MODAL FUNCTIONS =====
 

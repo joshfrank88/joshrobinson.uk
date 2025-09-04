@@ -3,55 +3,128 @@ const cors = require('cors');
 const nodemailer = require('nodemailer');
 const helmet = require('helmet');
 const sgMail = require('@sendgrid/mail');
+const rateLimit = require('express-rate-limit');
+const hpp = require('hpp');
+const mongoSanitize = require('express-mongo-sanitize');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Security middleware
-app.use(helmet());
-
-// CORS configuration
-app.use(cors({
-    origin: ['https://joshrobinson.uk', 'https://*.netlify.app', 'http://localhost:8000', 'http://localhost:3000'],
-    credentials: true
+// Advanced Security Headers & CSP
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+            scriptSrc: ["'self'", "'unsafe-inline'"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com"],
+            imgSrc: ["'self'", "data:", "https:"],
+            connectSrc: ["'self'", "https://joshrobinson-uk-backend-emailing.onrender.com"],
+            objectSrc: ["'none'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'none'"],
+            workerSrc: ["'self'", "blob:"],
+            manifestSrc: ["'self'"]
+        }
+    },
+    hsts: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+        preload: true
+    },
+    referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    frameguard: { action: 'deny' },
+    noSniff: true,
+    ieNoOpen: true,
+    xssFilter: true
 }));
 
+// CORS configuration with enhanced security
+app.use(cors({
+    origin: ['https://joshrobinson.uk', 'https://www.joshrobinson.uk', 'http://localhost:3000'],
+    credentials: true,
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    maxAge: 86400 // 24 hours
+}));
 
-// Body parsing middleware
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// Additional security middleware
+app.use(hpp()); // Prevent HTTP Parameter Pollution
+app.use(mongoSanitize()); // Prevent NoSQL injection
+app.use(express.json({ limit: '10kb' })); // Limit payload size
+app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
-// Simple rate limiting
-const requestCounts = new Map();
-const RATE_LIMIT = 5; // 5 requests
-const RATE_LIMIT_WINDOW = 60000; // 1 minute
+// Advanced Rate Limiting & DDoS Protection
+const contactLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // Limit each IP to 5 contact form submissions per 15 minutes
+    message: {
+        success: false,
+        message: 'Too many contact form submissions. Please try again later.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false,
+    handler: (req, res) => {
+        res.status(429).json({
+            success: false,
+            message: 'Rate limit exceeded. Please try again in 15 minutes.'
+        });
+    }
+});
 
-const rateLimiterMiddleware = (req, res, next) => {
-    const ip = req.ip;
-    const now = Date.now();
+const generalLimiter = rateLimit({
+    windowMs: 60 * 1000, // 1 minute
+    max: 100, // Limit each IP to 100 requests per minute
+    message: {
+        success: false,
+        message: 'Too many requests. Please try again later.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false
+});
+
+// Apply rate limiting to all routes
+app.use(generalLimiter);
+
+// Performance monitoring middleware
+app.use((req, res, next) => {
+    const start = Date.now();
     
-    if (!requestCounts.has(ip)) {
-        requestCounts.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
-    } else {
-        const userData = requestCounts.get(ip);
-        if (now > userData.resetTime) {
-            userData.count = 1;
-            userData.resetTime = now + RATE_LIMIT_WINDOW;
-        } else {
-            userData.count++;
-        }
+    res.on('finish', () => {
+        const duration = Date.now() - start;
+        console.log(`📊 ${req.method} ${req.path} - ${res.statusCode} - ${duration}ms`);
         
-        if (userData.count > RATE_LIMIT) {
-            return res.status(429).json({
-                success: false,
-                message: 'Too many requests. Please try again later.'
-            });
+        // Log slow requests
+        if (duration > 1000) {
+            console.warn(`🐌 Slow request detected: ${req.method} ${req.path} took ${duration}ms`);
         }
+    });
+    
+    next();
+});
+
+// Advanced caching headers
+app.use((req, res, next) => {
+    // Cache static assets for 1 year
+    if (req.path.match(/\.(css|js|png|jpg|jpeg|gif|webp|ico|svg)$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+    }
+    // Cache HTML for 1 hour
+    else if (req.path.match(/\.html$/)) {
+        res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
+    }
+    // Cache API responses for 5 minutes
+    else if (req.path.startsWith('/api/')) {
+        res.setHeader('Cache-Control', 'private, max-age=300, must-revalidate');
+    }
+    // Default cache control
+    else {
+        res.setHeader('Cache-Control', 'public, max-age=600, must-revalidate');
     }
     
     next();
-};
+});
 
 // Email transporter setup
 const createTransporter = () => {
@@ -98,7 +171,7 @@ const createTransporter = () => {
 };
 
 // Contact form endpoint
-app.post('/api/contact', rateLimiterMiddleware, async (req, res) => {
+app.post('/api/contact', contactLimiter, async (req, res) => {
     try {
         const { name, email, service, message } = req.body;
 
@@ -174,7 +247,8 @@ Sent from joshrobinson.uk contact form
         };
 
         // Configure SendGrid
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+        sgMail.setApiKey(process.env.
+        SENDGRID_API_KEY);
 
         // Send main email to you
         const mainEmail = {
@@ -242,6 +316,34 @@ Sent from joshrobinson.uk contact form
             message: 'Failed to send message. Please try again later.'
         });
     }
+});
+
+// Global error handling middleware
+app.use((err, req, res, next) => {
+    console.error('🚨 Server Error:', err);
+    
+    // Security logging
+    if (err.status === 429) {
+        console.warn(`🚫 Rate limit exceeded for IP: ${req.ip}`);
+    }
+    
+    // Don't expose internal errors to client
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    const errorMessage = isDevelopment ? err.message : 'Internal server error';
+    
+    res.status(err.status || 500).json({
+        success: false,
+        message: errorMessage,
+        ...(isDevelopment && { stack: err.stack })
+    });
+});
+
+// 404 handler
+app.use('*', (req, res) => {
+    res.status(404).json({
+        success: false,
+        message: 'Route not found'
+    });
 });
 
 // Health check endpoint
