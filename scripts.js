@@ -224,8 +224,8 @@ function setupTouchGestures() {
             }
         }
         
-        // Swipe up for contact modal
-        if (deltaY < -100 && duration < 500) {
+        // Swipe up for contact modal (more intentional gesture)
+        if (deltaY < -150 && duration < 300 && distance > 100) {
             openContactModal();
         }
     }, { passive: true });
@@ -1037,6 +1037,49 @@ function setupPerformanceMonitoring() {
     });
 }
 
+// ===== PERFORMANCE OPTIMIZATIONS =====
+function setupPerformanceOptimizations() {
+    // Debounce scroll events for better performance
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
+        }
+        scrollTimeout = setTimeout(() => {
+            // Update scroll progress bar
+            updateScrollProgress();
+        }, 16); // ~60fps
+    });
+    
+    // Optimize image loading
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                    }
+                    imageObserver.unobserve(img);
+                }
+            });
+        }, { rootMargin: '50px' });
+        
+        images.forEach(img => imageObserver.observe(img));
+    }
+    
+    // Preload critical resources
+    const criticalLinks = document.querySelectorAll('link[rel="preload"]');
+    criticalLinks.forEach(link => {
+        if (link.href) {
+            const img = new Image();
+            img.src = link.href;
+        }
+    });
+}
+
 // Initialize lazy loading
 setupLazyLoading();
 
@@ -1051,6 +1094,9 @@ setupTouchGestures();
 
 // Initialize performance monitoring
 setupPerformanceMonitoring();
+
+// Initialize performance optimizations
+setupPerformanceOptimizations();
 
 // ===== CONTACT MODAL FUNCTIONS =====
 
@@ -1085,7 +1131,8 @@ function submitContactForm(event) {
     const originalText = submitButton.innerHTML;
     
     // Show loading state
-    submitButton.innerHTML = '<span>Sending...</span><i class="fas fa-spinner fa-spin"></i>';
+    submitButton.classList.add('loading');
+    submitButton.innerHTML = '<span>Sending...</span>';
     submitButton.disabled = true;
     
     // Prepare data for API
@@ -1120,10 +1167,30 @@ function submitContactForm(event) {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to send message. Please try again or email me directly at josh@joshrobinson.uk');
+        
+        // Better error handling
+        let errorMessage = 'Failed to send message. Please try again later.';
+        
+        if (error.name === 'TypeError' && error.message.includes('fetch')) {
+            errorMessage = 'Network error. Please check your internet connection and try again.';
+        } else if (error.message.includes('429')) {
+            errorMessage = 'Too many requests. Please wait a moment before trying again.';
+        }
+        
+        // Show error in a more user-friendly way
+        const submitButton = form.querySelector('.submit-button');
+        submitButton.innerHTML = `<span>Error: ${errorMessage}</span>`;
+        submitButton.style.background = '#dc3545';
+        
+        // Reset button after 3 seconds
+        setTimeout(() => {
+            submitButton.innerHTML = originalText;
+            submitButton.style.background = '';
+        }, 3000);
     })
     .finally(() => {
         // Reset button
+        submitButton.classList.remove('loading');
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
     });
