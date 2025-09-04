@@ -108,6 +108,38 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// ===== ADVANCED LAZY LOADING - OPTIMIZED =====
+function setupLazyLoading() {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                const picture = img.closest('picture');
+                
+                if (picture) {
+                    // Load WebP source if supported
+                    const webpSource = picture.querySelector('source[type="image/webp"]');
+                    if (webpSource && 'WebP' in window) {
+                        img.src = webpSource.srcset.split(' ')[0]; // Use first size
+                    }
+                }
+                
+                // Add loaded class for animations
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px', // Start loading 50px before image enters viewport
+        threshold: 0.1
+    });
+    
+    // Observe all images
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
 // ===== SMOOTH SCROLLING - OPTIMIZED =====
 function setupSmoothScrolling() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -810,6 +842,9 @@ console.log('🚀 Performance optimizations applied');
 console.log('📱 Mobile optimizations enabled');
 console.log('🎨 Typing animation restored with better performance');
 console.log('💬 Testimonials slider with accessibility features');
+
+// Initialize lazy loading
+setupLazyLoading();
 
 // ===== CONTACT MODAL FUNCTIONS =====
 

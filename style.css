@@ -107,6 +107,34 @@
     100% { transform: rotate(360deg); }
 }
 
+/* ===== IMAGE LOADING ANIMATIONS ===== */
+img {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+img.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Hero images load immediately */
+.hero-image {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Partner logos with smooth loading */
+.partner-logo {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.partner-logo.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* ===== RESET & BASE STYLES ===== */
 * {
     margin: 0;
