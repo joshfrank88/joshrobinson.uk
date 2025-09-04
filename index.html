@@ -37,6 +37,15 @@
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="apple-touch-icon" href="favicon.ico">
     
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Josh Robinson">
+    
     <!-- Preload critical fonts with font-display: swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -816,6 +825,11 @@
                 <button class="slider-nav next" aria-label="Next testimonial">
                     <i class="fas fa-chevron-right"></i>
                 </button>
+            </div>
+            
+            <!-- Mobile gesture hint -->
+            <div class="swipe-hint">
+                <i class="fas fa-hand-pointer"></i> Swipe left/right to navigate testimonials
             </div>
         </div>
     </section>
